@@ -124,9 +124,6 @@ const AltzJoinPage = () => {
           </div>
         </div>
       </div>
-      <div className="absolute left-0 right-0 bottom-0 h-[24px]">
-        <div className="absolute -translate-x-1/2 -translate-y-1/2 left-1/2 top-1/2 w-[108px] h-[4px] bg-[#202124] rounded-[12px]"></div>
-      </div>
       <div
         className="absolute left-0 right-0 top-[52px] h-[56px] flex flex-row items-center justify-start py-[14px] px-[24px] bg-[#fff] overflow-hidden hover:cursor-pointer"
         onClick={handleGoBack}
