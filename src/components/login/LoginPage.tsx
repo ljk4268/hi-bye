@@ -31,7 +31,7 @@ const LoginPage = () => {
         className="absolute -translate-x-1/2 left-1/2 bottom-[46px]"
         width="80"
         height="80"
-        src={process.env.PUBLIC_URL + '/assets/mic-line84_1235.png'}
+        src={process.env.PUBLIC_URL + '/mic-line84_1235.png'}
         alt="mic"
       />
       <div className="absolute left-[24px] right-[24px] bottom-[206px] flex flex-col items-start justify-start gap-[6px]">

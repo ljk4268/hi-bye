@@ -73,7 +73,7 @@ const ExistingLogin = () => {
         <img
           width="24"
           height="24"
-          src={process.env.PUBLIC_URL + '/assets/Arrow_Left.png'}
+          src={process.env.PUBLIC_URL+'/assets/Arrow_Left.png'}
           alt="arrow-left"
         />
       </div>

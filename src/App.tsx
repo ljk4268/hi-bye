@@ -3,7 +3,7 @@ import { Routes, Route } from 'react-router-dom'
 import Home from './components/Home'
 import LoginPage from './components/login/LoginPage'
 import ExistingLogin from './components/login/ExistingLogin'
-import AltzJoinPage from './components/join/AltzJoinPage'
+import AltzJoinPage from './components/altzJoin/AltzJoinPage'
 
 function App() {
   return (
