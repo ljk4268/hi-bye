@@ -8,7 +8,8 @@ import Arrow from '../Arrow'
 import AltzOneStep from './AltzOneStep'
 import AltzTwoStep from './AltzTwoStep'
 import AltzThreeStep from './AltzThreeStep'
-
+import AltzFourStep from './AltzFourStep'
+import AltzLastStep from './AltzLastStep'
 
 //type
 import { IUserInfo } from '../../interface/commonInterface'
@@ -16,6 +17,7 @@ import { IUserInfo } from '../../interface/commonInterface'
 const AltzJoinPage = () => {
   const navigate = useNavigate()
   const [currentPage, setCurrentPage] = useState(1)
+  const [lastPage, setLastPage] = useState(false)
   const [prevPages, setPrevPages] = useState<number[]>([])
   const [progressValue, setProgressValue] = useState(25)
   const [userData, setUserData] = useState<IUserInfo>({
@@ -38,6 +40,9 @@ const AltzJoinPage = () => {
       }
     } else {
       navigate('/')
+    }
+    if(lastPage){
+      setLastPage(false)
     }
   }
 
@@ -65,7 +70,9 @@ const AltzJoinPage = () => {
       case 3:
         return <AltzThreeStep userData={userData} setUserData={setUserData} />
       case 4:
-        return <div>4</div>
+        return <AltzFourStep userData={userData} setUserData={setUserData} />
+      case 5:
+        return <AltzLastStep userData={userData} setUserData={setUserData} />
       default:
         return null
     }
@@ -80,6 +87,15 @@ const AltzJoinPage = () => {
         break
       case 2:
         setIsDone(!!(userData.title !== ''))
+        break
+      case 3:
+        setIsDone(!!(userData.tel !== ''))
+        break
+      case 4:
+        setIsDone(!!(userData.password !== ''))
+        break
+      case 5:
+        setLastPage(true)
         break
       default:
         setIsDone(false)
@@ -96,10 +112,13 @@ const AltzJoinPage = () => {
       >
         <Arrow />
       </div>
-      <div className="absolute -translate-x-1/2 left-1/2 top-[114px] w-[216px] h-[24px]">
-        <ProgressBar value={progressValue} />
-      </div>
-      <Button isDone={isDone} onClick={handleGoNext} />
+      {!lastPage && (
+        <div className="absolute -translate-x-1/2 left-1/2 top-[114px] w-[216px] h-[24px]">
+          <ProgressBar value={progressValue} />
+        </div>
+      )}
+
+      <Button isDone={isDone} onClick={handleGoNext} text={lastPage ? '시작하기'  : '다음'}/>
     </div>
   )
 }

@@ -1,14 +1,13 @@
 import './App.css'
 import { Routes, Route } from 'react-router-dom'
-import Home from './components/Home'
 import LoginPage from './components/login/LoginPage'
 import ExistingLogin from './components/login/ExistingLogin'
 import AltzJoinPage from './components/altzJoin/AltzJoinPage'
 
 function App() {
   return (
-    <div className="App bg-slate-50 h-screen flex justify-center items-center">
-      <div>
+    <div className="App h-screen flex justify-center items-center bg-slate-50">
+      <div className='h-screen flex justify-center items-center bg-white'>
         <Routes>
           <Route path="/" element={<LoginPage />} />
           {/* <Route path="/login" element={} /> */}

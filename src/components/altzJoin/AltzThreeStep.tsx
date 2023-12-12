@@ -1,4 +1,7 @@
+// components
 import InputField from "../InputField";
+
+//type
 import { IAltzStepProps } from "../../interface/commonInterface";
 
 const AltzThreeStep: React.FC<IAltzStepProps> = ({ userData, setUserData }) => {
