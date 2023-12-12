@@ -10,8 +10,8 @@ function App() {
     <div className="App bg-slate-50 h-screen flex justify-center items-center">
       <div>
         <Routes>
-          <Route path="/" element={<Home />} />
-          <Route path="/login" element={<LoginPage />} />
+          <Route path="/" element={<LoginPage />} />
+          {/* <Route path="/login" element={} /> */}
           <Route path="/existingLogin" element={<ExistingLogin />} />
           <Route path="/altzJoin" element={<AltzJoinPage />} />
         </Routes>

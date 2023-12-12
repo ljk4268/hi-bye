@@ -1,13 +1,14 @@
 // components
-import InputField from '../InputField'
+import InputField from "../InputField";
+import Mic from "../Mic";
 // types
-import { IAltzStepProps } from '../../interface/commonInterface'
-import { useEffect, useState } from 'react'
+import { IAltzStepProps } from "../../interface/commonInterface";
+import { useEffect, useState } from "react";
 
 interface ITitleButtonProps {
-  text: string
-  onClick: () => void
-  isActive: boolean
+  text: string;
+  onClick: () => void;
+  isActive: boolean;
 }
 
 const TitleButton: React.FC<ITitleButtonProps> = ({
@@ -17,30 +18,34 @@ const TitleButton: React.FC<ITitleButtonProps> = ({
 }) => {
   return (
     <div
-      className={`self-stretch h-[56px] shrink-0 flex flex-row items-center justify-center py-[12px] px-[24px] border-[1px] border-solid border-[#00acff] rounded-[10px] text-[#212121] hover:cursor-pointer ${
-        isActive ? 'bg-[#00acff] text-[#fff]' : ''
+      className={`self-stretch h-[56px] shrink-0 flex flex-row items-center justify-center py-[12px] px-[24px] border-[1px] border-solid border-[#841EFF] rounded-[10px] text-[#631DB1] hover:cursor-pointer ${
+        isActive ? "bg-[#841EFF] text-[#fff]" : ""
       }`}
       onClick={onClick}
     >
-      <div className="text-[16px] leading-[26px] font-['Pretendard'] font-semibold  text-center whitespace-nowrap">
+      <div
+        className={`text-[16px] leading-[26px] font-['Pretendard'] font-semibold  text-center whitespace-nowrap ${
+          isActive ? "text-[#fff]" : ""
+        }`}
+      >
         {text}
       </div>
     </div>
-  )
-}
+  );
+};
 
 const AltzTwoStep: React.FC<IAltzStepProps> = ({ userData, setUserData }) => {
-  const titleArr = ['000님', '000 할머니', '기타']
-  const [userTitle, setUserTitle] = useState<string>(userData.title || '');
+  const titleArr = ["000님", "000 할머니", "기타"];
+  const [userTitle, setUserTitle] = useState<string>(userData.title || "");
   const handleTitleChange = (text: string) => {
-    setUserData((prevData) => ({ ...prevData, title: text }))
-  }
+    setUserData((prevData) => ({ ...prevData, title: text }));
+  };
   const handleUserTitleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    setUserTitle(e.target.value)
-  }
+    setUserTitle(e.target.value);
+  };
   useEffect(() => {
-    setUserData((prevData) => ({ ...prevData, title: userTitle }))
-  }, [userTitle, setUserData])
+    setUserData((prevData) => ({ ...prevData, title: userTitle }));
+  }, [userTitle, setUserData]);
   return (
     <div className="absolute left-[24px] right-[24px] top-[214px] flex flex-col items-start justify-start gap-[42px]">
       <div className="self-stretch flex flex-col items-start justify-start">
@@ -56,11 +61,11 @@ const AltzTwoStep: React.FC<IAltzStepProps> = ({ userData, setUserData }) => {
               key={title}
               text={title}
               onClick={() => {
-                handleTitleChange(title)
+                handleTitleChange(title);
               }}
               isActive={userData.title === title}
             />
-          )
+          );
         })}
         {/* 직접 말씀해주실래요 */}
         <InputField
@@ -69,16 +74,11 @@ const AltzTwoStep: React.FC<IAltzStepProps> = ({ userData, setUserData }) => {
           onChange={handleUserTitleChange}
           placeholder="직접 말씀해주실래요?"
         >
-          <img
-            width="26"
-            height="26"
-            src={process.env.PUBLIC_URL + '/mic.png'}
-            alt="mic"
-          />
+          <Mic />
         </InputField>
       </div>
     </div>
-  )
-}
+  );
+};
 
-export default AltzTwoStep
+export default AltzTwoStep;

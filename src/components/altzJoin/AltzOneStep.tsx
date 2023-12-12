@@ -1,28 +1,28 @@
 // components
-import InputField from '../InputField'
+import InputField from "../InputField";
+import Mic from "../Mic";
 
 // type
-import { IAltzStepProps } from '../../interface/commonInterface'
+import { IAltzStepProps } from "../../interface/commonInterface";
 
 const AltzOneStep: React.FC<IAltzStepProps> = ({
   userData,
   setUserData,
-  birthRef
+  birthRef,
 }) => {
   const handleNameChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    setUserData((prev) => ({ ...prev, name: e.target.value }))
-  }
+    setUserData((prev) => ({ ...prev, name: e.target.value }));
+  };
   const handleBirthChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    const regex = /^[0-9\b -]{0,8}$/
+    const regex = /^[0-9\b -]{0,8}$/;
     if (regex.test(e.target.value)) {
-      setUserData((prev) => ({ ...prev, birth: e.target.value }))
+      setUserData((prev) => ({ ...prev, birth: e.target.value }));
     }
-  }
+  };
   const handleGenderChange = (selectedGender: string) => {
-    setUserData((prev) => ({ ...prev, gender: selectedGender }))
-  }
+    setUserData((prev) => ({ ...prev, gender: selectedGender }));
+  };
 
-  
   return (
     <div className="absolute left-[24px] right-[24px] top-[150px] flex flex-col items-start justify-start gap-[42px]">
       <div className="self-stretch flex flex-col items-start justify-start gap-[28px]">
@@ -47,12 +47,7 @@ const AltzOneStep: React.FC<IAltzStepProps> = ({
             onChange={handleNameChange}
             placeholder="성함을 입력해주세요"
           >
-            <img
-              width="26"
-              height="26"
-              src={process.env.PUBLIC_URL + '/mic.png'}
-              alt="mic"
-            />
+            <Mic />
           </InputField>
         </div>
         {/* 성별 */}
@@ -62,26 +57,30 @@ const AltzOneStep: React.FC<IAltzStepProps> = ({
           </div>
           <div className="self-stretch flex flex-row items-center justify-center gap-[16px]">
             <div
-              className={`flex-1 h-[56px] flex flex-row items-center justify-center py-[12px] px-[24px] border-[1px] border-solid rounded-[10px] text-[#212121] border-[#00acff] hover:cursor-pointer ${
-                userData.gender === 'man'
-                  ? 'bg-[#00acff] text-[#fff]'
-                  : ''
+              className={`flex-1 h-[56px] flex flex-row items-center justify-center py-[12px] px-[24px] border-[1px] border-solid rounded-[10px] text-[#631DB1] border-[#841EFF] hover:cursor-pointer ${
+                userData.gender === "man" ? "bg-[#841EFF]" : ""
               }`}
-              onClick={() => handleGenderChange('man')}
+              onClick={() => handleGenderChange("man")}
             >
-              <div className="text-[16px] leading-[26px] font-['Pretendard'] font-semibold  text-center whitespace-nowrap">
+              <div
+                className={`text-[16px] leading-[26px] font-['Pretendard'] font-semibold text-center whitespace-nowrap ${
+                  userData.gender === "man" ? "text-[#fff]" : ""
+                }`}
+              >
                 남자
               </div>
             </div>
             <div
-              className={`flex-1 h-[56px] flex flex-row items-center justify-center py-[12px] px-[24px] border-[1px] border-solid rounded-[10px] text-[#212121] border-[#00acff] hover:cursor-pointer ${
-                userData.gender === 'woman'
-                  ? 'bg-[#00acff] text-[#fff]'
-                  : ''
+              className={`flex-1 h-[56px] flex flex-row items-center justify-center py-[12px] px-[24px] border-[1px] border-solid rounded-[10px] text-[#631DB1] border-[#841EFF] hover:cursor-pointer ${
+                userData.gender === "woman" ? "bg-[#841EFF] text-[#fff]" : ""
               }`}
-              onClick={() => handleGenderChange('woman')}
+              onClick={() => handleGenderChange("woman")}
             >
-              <div className="text-[16px] leading-[26px] font-['Pretendard'] font-semibold text-center whitespace-nowrap">
+              <div
+                className={`text-[16px] leading-[26px] font-['Pretendard'] font-semibold text-center whitespace-nowrap ${
+                  userData.gender === "woman" ? "text-[#fff]" : ""
+                }`}
+              >
                 여자
               </div>
             </div>
@@ -102,7 +101,7 @@ const AltzOneStep: React.FC<IAltzStepProps> = ({
         </div>
       </div>
     </div>
-  )
-}
+  );
+};
 
-export default AltzOneStep
+export default AltzOneStep;

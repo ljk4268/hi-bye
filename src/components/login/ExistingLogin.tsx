@@ -1,7 +1,10 @@
 import { useEffect, useState } from 'react'
 import { useNavigate } from 'react-router-dom'
+
+//components
 import InputField from '../InputField'
 import Button from '../Button'
+import Arrow from '../Arrow'
 
 const ExistingLogin = () => {
   const [contact, setContact] = useState<string | ''>('')
@@ -9,7 +12,7 @@ const ExistingLogin = () => {
   const [isDone, setIsDone] = useState<boolean>(false)
   const navigate = useNavigate()
   const handleContactChange = (event: React.ChangeEvent<HTMLInputElement>) => {
-    const regex = /^[0-9\b -]{0,13}$/
+    const regex = /^[0-9\b -]{0,12}$/
     if (regex.test(event.target.value)) {
       setContact(event.target.value)
     }
@@ -63,19 +66,11 @@ const ExistingLogin = () => {
         </div>
       </div>
       <Button isDone={isDone} onClick={handleButtonClick} />
-      <div className="absolute left-0 right-0 bottom-0 h-[24px]">
-        <div className="absolute -translate-x-1/2 -translate-y-1/2 left-1/2 top-1/2 w-[108px] h-[4px] bg-[#202124] rounded-[12px]"></div>
-      </div>
       <div
         className="absolute left-0 right-0 top-[52px] h-[56px] flex flex-row items-center justify-start py-[14px] px-[24px] bg-[#fff] overflow-hidden hover:cursor-pointer"
         onClick={handleGoBack}
       >
-        <img
-          width="24"
-          height="24"
-          src={process.env.PUBLIC_URL+'/assets/Arrow_Left.png'}
-          alt="arrow-left"
-        />
+        <Arrow />
       </div>
     </div>
   )

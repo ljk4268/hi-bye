@@ -4,8 +4,11 @@ import { useNavigate } from 'react-router-dom'
 // components
 import Button from '../Button'
 import ProgressBar from '../ProgressBar'
+import Arrow from '../Arrow'
 import AltzOneStep from './AltzOneStep'
 import AltzTwoStep from './AltzTwoStep'
+import AltzThreeStep from './AltzThreeStep'
+
 
 //type
 import { IUserInfo } from '../../interface/commonInterface'
@@ -60,7 +63,7 @@ const AltzJoinPage = () => {
       case 2:
         return <AltzTwoStep userData={userData} setUserData={setUserData} />
       case 3:
-        return <div>3</div>
+        return <AltzThreeStep userData={userData} setUserData={setUserData} />
       case 4:
         return <div>4</div>
       default:
@@ -91,12 +94,7 @@ const AltzJoinPage = () => {
         className="absolute left-0 right-0 top-[52px] h-[56px] flex flex-row items-center justify-start py-[14px] px-[24px] bg-[#fff] overflow-hidden hover:cursor-pointer"
         onClick={handleGoBack}
       >
-        <img
-          width="24"
-          height="24"
-          src={process.env.PUBLIC_URL + '/Arrow_Left.png'}
-          alt="arrow-left"
-        />
+        <Arrow />
       </div>
       <div className="absolute -translate-x-1/2 left-1/2 top-[114px] w-[216px] h-[24px]">
         <ProgressBar value={progressValue} />

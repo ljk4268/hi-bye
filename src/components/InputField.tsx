@@ -20,12 +20,13 @@ const InputField: React.FC<InputFieldProps> = ({
   inputRef,
 }) => {
   const hasValue = value.trim() !== ''
+  const fieldBorder = 'border-[#841EFF]'
 
   return (
     <>
       <div
         className={`self-stretch h-[56px] shrink-0 flex flex-row items-center justify-center py-[12px] px-[24px] border-[1px] border-solid rounded-[10px] ${
-          hasValue ? 'border-[#0a7feb]' : 'border-[#00acff]'
+          hasValue ? 'border-[#0A7FEB]' : fieldBorder
         }`}
       >
         <input
