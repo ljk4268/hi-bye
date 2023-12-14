@@ -2,9 +2,9 @@
 import InputField from '../InputField'
 
 //type
-import { IAltzStepProps } from '../../interface/commonInterface'
+import { IAlzStepProps } from '../../interface/commonInterface'
 
-const AltzFourStep: React.FC<IAltzStepProps> = ({ userData, setUserData }) => {
+const AlzFourStep: React.FC<IAlzStepProps> = ({ userData, setUserData }) => {
   const handlePasswordChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     setUserData((prevData) => ({ ...prevData, password: e.target.value }))
   }
@@ -34,4 +34,4 @@ const AltzFourStep: React.FC<IAltzStepProps> = ({ userData, setUserData }) => {
   )
 }
 
-export default AltzFourStep
+export default AlzFourStep

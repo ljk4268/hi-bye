@@ -1,3 +1,5 @@
+import { memo } from 'react'
+
 const MyPageLogo = () => {
   return (
     <svg xmlns="http://www.w3.org/2000/svg" width="24" height="31" fill="none">
@@ -39,6 +41,6 @@ const MyPageLogo = () => {
         </filter>
       </defs>
     </svg>
-  );
-};
-export default MyPageLogo;
+  )
+}
+export default memo(MyPageLogo)

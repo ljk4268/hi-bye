@@ -1,3 +1,6 @@
+import { memo } from 'react';
+
+
 const Arrow = () => {
   return (
     <svg
@@ -17,4 +20,4 @@ const Arrow = () => {
   );
 };
 
-export default Arrow;
+export default memo(Arrow);

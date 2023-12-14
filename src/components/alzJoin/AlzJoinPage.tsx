@@ -4,17 +4,17 @@ import { useNavigate } from 'react-router-dom'
 // components
 import Button from '../Button'
 import ProgressBar from '../ProgressBar'
-import Arrow from '../Arrow'
-import AltzOneStep from './AltzOneStep'
-import AltzTwoStep from './AltzTwoStep'
-import AltzThreeStep from './AltzThreeStep'
-import AltzFourStep from './AltzFourStep'
-import AltzLastStep from './AltzLastStep'
+import Arrow from '../Icon/Arrow'
+import AltOneStep from './AlzOneStep'
+import AltTwoStep from './AlzTwoStep'
+import AltThreeStep from './AlzThreeStep'
+import AltFourStep from './AlzFourStep'
+import AltLastStep from './AlzLastStep'
 
 //type
 import { IUserInfo } from '../../interface/commonInterface'
 
-const AltzJoinPage = () => {
+const AlzJoinPage = () => {
   const navigate = useNavigate()
   const [currentPage, setCurrentPage] = useState(1)
   const [lastPage, setLastPage] = useState(false)
@@ -39,9 +39,9 @@ const AltzJoinPage = () => {
         setProgressValue((prevValue) => prevValue - 25)
       }
     } else {
-      navigate('/')
+      navigate('/alz')
     }
-    if(lastPage){
+    if (lastPage) {
       setLastPage(false)
     }
   }
@@ -53,26 +53,30 @@ const AltzJoinPage = () => {
     setPrevPages((prev) => [...prev, currentPage])
     setCurrentPage((prevPage) => prevPage + 1)
     setProgressValue((prevValue) => prevValue + 25)
+
+    if (lastPage) {
+      navigate('/alz/patientPage')
+    }
   }
 
   const renderPage = () => {
     switch (currentPage) {
       case 1:
         return (
-          <AltzOneStep
+          <AltOneStep
             userData={userData}
             setUserData={setUserData}
             birthRef={birthRef}
           />
         )
       case 2:
-        return <AltzTwoStep userData={userData} setUserData={setUserData} />
+        return <AltTwoStep userData={userData} setUserData={setUserData} />
       case 3:
-        return <AltzThreeStep userData={userData} setUserData={setUserData} />
+        return <AltThreeStep userData={userData} setUserData={setUserData} />
       case 4:
-        return <AltzFourStep userData={userData} setUserData={setUserData} />
+        return <AltFourStep userData={userData} setUserData={setUserData} />
       case 5:
-        return <AltzLastStep userData={userData} setUserData={setUserData} />
+        return <AltLastStep userData={userData} setUserData={setUserData} />
       default:
         return null
     }
@@ -118,9 +122,13 @@ const AltzJoinPage = () => {
         </div>
       )}
 
-      <Button isDone={isDone} onClick={handleGoNext} text={lastPage ? '시작하기'  : '다음'}/>
+      <Button
+        isDone={isDone}
+        onClick={handleGoNext}
+        text={lastPage ? '시작하기' : '다음'}
+      />
     </div>
   )
 }
 
-export default AltzJoinPage
+export default AlzJoinPage

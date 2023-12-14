@@ -1,6 +1,11 @@
 import React from "react";
 
-const CheckIcon = ({ check = false }: { check?: boolean }) => {
+interface ICheckIconPros {
+  check?: boolean
+  onClick?: () => void
+}
+
+const CheckIcon: React.FC<ICheckIconPros> = ({ check}) => {
   return (
     <>
       {check ? (

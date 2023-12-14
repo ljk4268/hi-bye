@@ -4,7 +4,7 @@ import { useNavigate } from 'react-router-dom'
 //components
 import InputField from '../InputField'
 import Button from '../Button'
-import Arrow from '../Arrow'
+import Arrow from '../Icon/Arrow'
 
 const ExistingLogin = () => {
   const [contact, setContact] = useState<string | ''>('')
@@ -48,7 +48,7 @@ const ExistingLogin = () => {
               value={contact}
               onChange={handleContactChange}
               placeholder="연락처를 입력해주세요"
-              errorMessage="전화번호 형식을 확인해주세요.(확인하기)"
+              errorMessage=""
             />
           </div>
           <div className="self-stretch h-[78px] shrink-0 flex flex-col items-center justify-start">
@@ -57,7 +57,7 @@ const ExistingLogin = () => {
               value={password}
               onChange={handlePasswordChange}
               placeholder="비밀번호를 입력해주세요"
-              errorMessage="비밀번호 형식을 확인해주세요.(확인하기)"
+              errorMessage=""
             />
           </div>
           <div className="text-[14px] leading-[20px] font-['Pretendard'] font-medium text-[#212121] text-center whitespace-nowrap">

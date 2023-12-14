@@ -1,16 +1,16 @@
 // components
-import InputField from "../InputField";
+import InputField from '../InputField'
 
 //type
-import { IAltzStepProps } from "../../interface/commonInterface";
+import { IAlzStepProps } from '../../interface/commonInterface'
 
-const AltzThreeStep: React.FC<IAltzStepProps> = ({ userData, setUserData }) => {
+const AlzThreeStep: React.FC<IAlzStepProps> = ({ userData, setUserData }) => {
   const handleTelChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const regex = /^[0-9\b -]{0,12}$/
     if (regex.test(e.target.value)) {
-      setUserData((prevData) => ({ ...prevData, tel: e.target.value }));
+      setUserData((prevData) => ({ ...prevData, tel: e.target.value }))
     }
-  };
+  }
   return (
     <div className="absolute left-[24px] right-[24px] top-[214px] flex flex-col items-start justify-start gap-[42px]">
       <div className="self-stretch flex flex-col items-start justify-start">
@@ -30,7 +30,7 @@ const AltzThreeStep: React.FC<IAltzStepProps> = ({ userData, setUserData }) => {
         />
       </div>
     </div>
-  );
-};
+  )
+}
 
-export default AltzThreeStep;
+export default AlzThreeStep

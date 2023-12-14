@@ -1,7 +1,7 @@
 //type
-import { IAltzStepProps } from '../../interface/commonInterface'
+import { IAlzStepProps } from '../../interface/commonInterface'
 
-const AltzLastStep: React.FC<IAltzStepProps> = ({ userData, setUserData }) => {
+const AltzLastStep: React.FC<IAlzStepProps> = ({ userData, setUserData }) => {
   return (
     <div className="relative w-[360px] h-[800px] bg-[#fff] overflow-hidden">
       <div className="absolute left-[24px] right-[24px] top-[214px] flex flex-col items-start justify-start">
