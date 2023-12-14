@@ -1,38 +1,10 @@
 // components
+import SelectionButton from "../SelectionButton";
 import InputField from "../InputField";
 import Mic from "../Mic";
 // types
 import { IAltzStepProps } from "../../interface/commonInterface";
 import { useEffect, useState } from "react";
-
-interface ITitleButtonProps {
-  text: string;
-  onClick: () => void;
-  isActive: boolean;
-}
-
-const TitleButton: React.FC<ITitleButtonProps> = ({
-  text,
-  onClick,
-  isActive,
-}) => {
-  return (
-    <div
-      className={`self-stretch h-[56px] shrink-0 flex flex-row items-center justify-center py-[12px] px-[24px] border-[1px] border-solid border-[#841EFF] rounded-[10px] text-[#631DB1] hover:cursor-pointer ${
-        isActive ? "bg-[#841EFF] text-[#fff]" : ""
-      }`}
-      onClick={onClick}
-    >
-      <div
-        className={`text-[16px] leading-[26px] font-['Pretendard'] font-semibold  text-center whitespace-nowrap ${
-          isActive ? "text-[#fff]" : ""
-        }`}
-      >
-        {text}
-      </div>
-    </div>
-  );
-};
 
 const AltzTwoStep: React.FC<IAltzStepProps> = ({ userData, setUserData }) => {
   const titleArr = ["000님", "000 할머니", "기타"];
@@ -57,7 +29,7 @@ const AltzTwoStep: React.FC<IAltzStepProps> = ({ userData, setUserData }) => {
       <div className="self-stretch flex flex-col items-center justify-start gap-[24px]">
         {titleArr.map((title) => {
           return (
-            <TitleButton
+            <SelectionButton
               key={title}
               text={title}
               onClick={() => {

@@ -3,6 +3,7 @@ import { Routes, Route } from 'react-router-dom'
 import LoginPage from './components/login/LoginPage'
 import ExistingLogin from './components/login/ExistingLogin'
 import AltzJoinPage from './components/altzJoin/AltzJoinPage'
+import AMypage from './components/patient/AMypage'
 
 function App() {
   return (
@@ -13,6 +14,7 @@ function App() {
           {/* <Route path="/login" element={} /> */}
           <Route path="/existingLogin" element={<ExistingLogin />} />
           <Route path="/altzJoin" element={<AltzJoinPage />} />
+          <Route path="/patientPage" element={<AMypage />} />
         </Routes>
       </div>
     </div>

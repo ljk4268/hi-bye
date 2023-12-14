@@ -1,9 +1,15 @@
-const Mic = () => {
+const Mic = ({
+  width = "26",
+  height = "26",
+}: {
+  width?: string;
+  height?: string;
+}) => {
   return (
     <svg
       xmlns="http://www.w3.org/2000/svg"
-      width="26"
-      height="26"
+      width={width}
+      height={height}
       viewBox="0 0 26 26"
       fill="none"
     >
