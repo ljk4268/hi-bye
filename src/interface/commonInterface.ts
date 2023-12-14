@@ -14,3 +14,15 @@ export interface IAlzStepProps {
   onChange?: (event: React.ChangeEvent<HTMLInputElement>) => void
   onClick?: () => void
 }
+export interface IMessage {
+  id: number
+  userYn: boolean
+  message: string
+  created_at: number
+}
+
+export interface IButtonProps {
+  isDone?: boolean;
+  onClick?: () => void;
+  text?: string;
+}

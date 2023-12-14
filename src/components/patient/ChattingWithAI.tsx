@@ -2,7 +2,6 @@
 import './ChattingWithAI.css'
 
 // components
-import AlzLogo from '../Icon/AlzLogo'
 import Button from '../Button'
 import Arrow from '../Icon/Arrow'
 import MicRecognizing from '../MicRecognizing'
@@ -11,36 +10,84 @@ import AiQuestion from './AiQuestion'
 
 // hook
 import useFormattedDate from '../../hooks/useFormattedDate'
-import { useEffect, useRef, useState } from 'react'
+import useSpeechToText from '../../hooks/useSpeechToText'
+import React, { useEffect, useRef, useState } from 'react'
 import { useNavigate } from 'react-router-dom'
+
+//type
+import { IMessage } from '../../interface/commonInterface'
+interface ISmallButtonProps {
+  text?: string
+  isActive?: boolean
+  onClick?: () => void
+}
+
+const SmallButton: React.FC<ISmallButtonProps> = ({
+  text,
+  isActive,
+  onClick,
+}) => {
+  const backgroundColor = isActive ? 'bg-[#841EFF]' : 'bg-[#fff]'
+  const textColor = isActive ? 'text-[#fff]' : 'text-[#631db1]'
+  return (
+    <div
+      className={`flex-1 h-[56px] flex flex-row items-center justify-center py-[12px] px-[24px] border-[2px] border-solid border-[#841eff] rounded-[20px] hover:cursor-pointer ${backgroundColor}`}
+      onClick={onClick}
+    >
+      <div
+        className={`text-[16px] leading-[26px] font-['Pretendard'] font-semibold text-center whitespace-nowrap ${textColor}`}
+      >
+        {text}
+      </div>
+    </div>
+  )
+}
 
 const ChattingWithAI = () => {
   const navigate = useNavigate()
   const todayFormatted: string = useFormattedDate()
-  const [isSpeaking, setIsSpeacking] = useState(false)
+  const { transcript, listening, toggleListening } = useSpeechToText()
+  const [message, setMessage] = useState<IMessage[]>([
+    {
+      id: 0,
+      userYn: false,
+      message: '오늘 어떤일이 있으셨나요?',
+      created_at: Date.now(),
+    },
+  ])
   const scrollRef = useRef<HTMLDivElement>(null)
-
-  const handleSpeakButtonClick = () => {
-    setIsSpeacking((prevIs) => !isSpeaking)
-  }
+  let currentNumber = 1
 
   const handleGoBack = () => {
     navigate(-1)
   }
-  useEffect(() => {
-    if (scrollRef.current) {
-      // isSpeaking이 변경될 때만 스크롤을 맨 아래로 이동
-      const location =
-        scrollRef.current.scrollHeight - scrollRef.current.clientHeight
-      if (isSpeaking) {
-        scrollRef.current.scrollTo({
-          top: location,
-          left: 0,
-          behavior: 'smooth',
-        })
-      }
+
+  const addNewMessage = () => {
+    const newMessage: IMessage = {
+      id: currentNumber++,
+      userYn: true,
+      message: transcript,
+      created_at: Date.now(),
     }
-  }, [isSpeaking])
+    setMessage((prev) => (prev ? [...prev, newMessage] : [newMessage]))
+  }
+
+  useEffect(() => {
+    if (!scrollRef.current) return
+
+    const location =
+      scrollRef.current.scrollHeight - scrollRef.current.clientHeight
+
+    if (listening) {
+      scrollRef.current.scrollTo({
+        top: location,
+        left: 0,
+        behavior: 'smooth',
+      })
+    } else if (transcript) {
+      addNewMessage()
+    }
+  }, [transcript, listening, currentNumber])
 
   return (
     <div className="relative w-[360px] h-[800px] bg-[#fff] overflow-hidden">
@@ -53,7 +100,7 @@ const ChattingWithAI = () => {
             오늘의 기록
           </div>
         </div>
-        {/* chat */}
+        {/* content */}
         <div
           ref={scrollRef}
           className="scroll w-[312px] ml-[24px] flex flex-col items-center gap-[24px] overflow-y-auto max-h-[500px]"
@@ -62,18 +109,24 @@ const ChattingWithAI = () => {
           <div className="self-stretch text-[16px] leading-[26px] font-['Pretendard'] font-semibold text-[#646464] text-center">
             {todayFormatted}
           </div>
-          {/* 질문 */}
-          <AiQuestion />
-          {/* 사용자 대답 */}
-          <UserAnswer />
-          <div>{isSpeaking && <MicRecognizing />}</div>
+
+          {/* chat */}
+          {message?.map((d) =>
+            d.userYn ? (
+              <UserAnswer key={d.id} text={d.message} />
+            ) : (
+              <AiQuestion key={d.id} />
+            )
+          )}
+
+          <div>{listening && <MicRecognizing />}</div>
         </div>
       </div>
 
       <Button
-        text={isSpeaking ? '완료' : '말하기'}
+        text={listening ? '완료' : '말하기'}
         isDone={true}
-        onClick={handleSpeakButtonClick}
+        onClick={toggleListening}
       />
     </div>
   )

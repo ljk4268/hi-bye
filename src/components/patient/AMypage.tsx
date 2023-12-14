@@ -1,10 +1,13 @@
 import { useCallback, useState } from 'react'
+import { useNavigate } from 'react-router-dom'
+
 // components
 import TodoList from '../todo/TodoList'
 import SelectionButton from '../SelectionButton'
 import MyPageLogo from '../Icon/MyPageLogo'
 import HelpMic from '../Icon/HelpMic'
 import Mic from '../Icon/Mic'
+
 
 const GoHelp = () => {
   return (
@@ -35,6 +38,7 @@ const AMypage = () => {
   const [textArr, setTextArr] = useState(['오늘의 질문', '쪽지 남기기'])
   const [action, setAction] = useState('')
   const [help, setHelp] = useState(false)
+  const navigate = useNavigate()
 
   const handleClickAction = useCallback((text: string) => {
     setAction(text)
@@ -42,6 +46,10 @@ const AMypage = () => {
   const handleToggleHelp = useCallback(() => {
     setHelp((prevHelp) => !prevHelp)
   }, [])
+
+  const handleGoPage = () => {
+    navigate(`/alz/chatting`)
+  }
 
   return (
     <div className="relative w-[360px] h-[800px] bg-[#fff] overflow-hidden">
@@ -59,7 +67,10 @@ const AMypage = () => {
         </div>
         {/* 알츠랑 이야기하기 */}
         <div className="self-stretch flex flex-col items-center justify-start hover:cursor-pointer">
-          <div className="self-stretch h-[130px] shrink-0 flex flex-col items-center justify-center gap-[10px] py-[12px] px-[24px] bg-[#841eff] rounded-[20px]">
+          <div
+            className="self-stretch h-[130px] shrink-0 flex flex-col items-center justify-center gap-[10px] py-[12px] px-[24px] bg-[#841eff] rounded-[20px]"
+            onClick={handleGoPage}
+          >
             <Mic width="54" height="54" />
             <div className="text-[18px] leading-[28px] font-['Pretendard'] font-semibold text-[#fff] text-center whitespace-nowrap">
               알츠랑 이야기하기

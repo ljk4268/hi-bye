@@ -1,3 +1,4 @@
+import { memo } from 'react'
 import AlzLogo from '../Icon/AlzLogo'
 const AiQuestion = () => {
   return (
@@ -15,4 +16,4 @@ const AiQuestion = () => {
     </div>
   )
 }
-export default AiQuestion
+export default memo(AiQuestion)

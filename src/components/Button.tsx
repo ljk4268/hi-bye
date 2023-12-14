@@ -1,11 +1,8 @@
-interface ButtonProps {
-  isDone?: boolean;
-  onClick?: () => void;
-  text?: string;
-}
+import { memo } from 'react'
+import { IButtonProps } from '../interface/commonInterface'
 
-const Button: React.FC<ButtonProps> = ({ isDone, onClick, text = "다음" }) => {
-  const backgroundColor = isDone ? "bg-[#841EFF]" : "bg-[#d3d3d3]";
+const Button: React.FC<IButtonProps> = ({ isDone, onClick, text = '다음' }) => {
+  const backgroundColor = isDone ? 'bg-[#841EFF]' : 'bg-[#d3d3d3]'
   return (
     <button
       className={`absolute left-[24px] right-[24px] bottom-[72px] h-[56px] flex flex-row items-center justify-center py-[12px] px-[24px] rounded-[20px] ${backgroundColor}`}
@@ -16,7 +13,7 @@ const Button: React.FC<ButtonProps> = ({ isDone, onClick, text = "다음" }) => 
         {text}
       </div>
     </button>
-  );
-};
+  )
+}
 
-export default Button;
+export default memo(Button)
