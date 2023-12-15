@@ -5,9 +5,13 @@ import LoginPage from './components/login/LoginPage'
 import ExistingLogin from './components/login/ExistingLogin'
 import AlzJoinPage from './components/join/alzJoin/AlzJoinPage'
 import ProtectorJoin from './components/join/prortectorJoin/ProtectorJoin'
+
 // patient
-import AMypage from './components/patient/AMypage'
 import ChattingWithAI from './components/patient/ChattingWithAI'
+import AMainPage from './components/patient/AMainPage'
+// protector
+import PMainPage from './components/protector/PMainPage'
+import ViewCollection from './components/protector/ViewCollection'
 
 function App() {
   return (
@@ -18,8 +22,10 @@ function App() {
           <Route path="/alz/existingLogin" element={<ExistingLogin />} />
           <Route path="/alz/alzJoin" element={<AlzJoinPage />} />
           <Route path="/alz/proJoin" element={<ProtectorJoin />} />
-          <Route path="/alz/patientPage" element={<AMypage />} />
+          <Route path="/alz/patientPage" element={<AMainPage />} />
+          <Route path="/alz/protectorPage" element={<PMainPage />} />
           <Route path="/alz/chatting" element={<ChattingWithAI />} />
+          <Route path="/alz/collection" element={<ViewCollection />} />
         </Routes>
       </div>
     </div>

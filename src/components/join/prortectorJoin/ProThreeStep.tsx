@@ -5,28 +5,25 @@ import InputField from '../../InputField'
 import { IProtectorStepProps } from '../../../interface/commonInterface'
 import { useCallback } from 'react'
 
-const ProOneStep: React.FC<IProtectorStepProps> = ({
+const ProThreeStep: React.FC<IProtectorStepProps> = ({
   protectorData,
   setProtectorData,
 }) => {
-  const handleNameChange = useCallback(
+  const handleProtectorPasswordChange = useCallback(
     (e: React.ChangeEvent<HTMLInputElement>) => {
-      setProtectorData((prev) => ({ ...prev, patientName: e.target.value }))
+      setProtectorData((prev) => ({
+        ...prev,
+        protectorPassword: e.target.value,
+      }))
     },
     [setProtectorData]
   )
-  const handleTelChange = useCallback(
+  const handleProtectorTelChange = useCallback(
     (e: React.ChangeEvent<HTMLInputElement>) => {
       const regex = /^[0-9\b -]{0,12}$/
       if (regex.test(e.target.value)) {
-        setProtectorData((prev) => ({ ...prev, patientTel: e.target.value }))
+        setProtectorData((prev) => ({ ...prev, protectorTel: e.target.value }))
       }
-    },
-    [setProtectorData]
-  )
-  const handlePasswordChange = useCallback(
-    (e: React.ChangeEvent<HTMLInputElement>) => {
-      setProtectorData((prev) => ({ ...prev, patientPassword: e.target.value }))
     },
     [setProtectorData]
   )
@@ -37,14 +34,8 @@ const ProOneStep: React.FC<IProtectorStepProps> = ({
         <div className="self-stretch flex flex-col items-start justify-end">
           <div className="self-stretch text-[18px] leading-[28px] text-[#000]">
             <span className="font-['Pretendard'] font-medium">
-              환자분의 성함
-            </span>
-            <span className="font-['Pretendard'] font-semibold">
-              , 휴대폰 번호, 비밀 번호
-            </span>
-            <span className="font-['Pretendard'] font-medium">
-              를 <br />
-              입력해주세요.
+              가입 시 필요한 <br />
+              보호자 정보를 입력해주세요.
             </span>
           </div>
         </div>
@@ -52,24 +43,13 @@ const ProOneStep: React.FC<IProtectorStepProps> = ({
         <div className="self-stretch flex flex-col items-center justify-start gap-[24px]">
           <div className="self-stretch flex flex-col items-start justify-start gap-[6px]">
             <div className="w-[312px] text-[16px] leading-[26px] font-['Pretendard'] font-semibold text-[#212121]">
-              성함이 어떻게 되시나요?
-            </div>
-            <InputField
-              type="text"
-              value={protectorData.patientName}
-              onChange={handleNameChange}
-              placeholder="환자분의 성함을 입력해주세요"
-            />
-          </div>
-          <div className="self-stretch flex flex-col items-start justify-start gap-[6px]">
-            <div className="w-[312px] text-[16px] leading-[26px] font-['Pretendard'] font-semibold text-[#212121]">
               휴대폰 번호
             </div>
             <InputField
               type="text"
-              value={protectorData.patientTel}
-              onChange={handleTelChange}
-              placeholder="가입 시 등록한 환자분의 연락처를 입력해주세요"
+              value={protectorData.protectorTel}
+              onChange={handleProtectorTelChange}
+              placeholder="번호를 입력해주세요"
             />
           </div>
           <div className="self-stretch flex flex-col items-start justify-start gap-[6px]">
@@ -78,9 +58,9 @@ const ProOneStep: React.FC<IProtectorStepProps> = ({
             </div>
             <InputField
               type="text"
-              value={protectorData.patientPassword}
-              onChange={handlePasswordChange}
-              placeholder="가입 시 등록한 환자분의 비밀번호를 입력해주세요"
+              value={protectorData.protectorPassword}
+              onChange={handleProtectorPasswordChange}
+              placeholder="비밀번호를 입력해주세요"
             />
           </div>
         </div>
@@ -89,4 +69,4 @@ const ProOneStep: React.FC<IProtectorStepProps> = ({
   )
 }
 
-export default ProOneStep
+export default ProThreeStep

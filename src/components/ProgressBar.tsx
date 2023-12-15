@@ -1,7 +1,7 @@
 import Box from "@mui/material/Box";
 import LinearProgress from "@mui/material/LinearProgress";
 import { createTheme, ThemeProvider } from "@mui/material/styles";
-
+import { memo } from 'react';
 const theme = createTheme({
   palette: {
     primary: {
@@ -28,4 +28,4 @@ const ProgressBar: React.FC<ProgressProps> = ({ value }) => {
   );
 };
 
-export default ProgressBar;
+export default memo(ProgressBar);

@@ -7,6 +7,7 @@ import SelectionButton from '../SelectionButton'
 import MyPageLogo from '../Icon/MyPageLogo'
 import HelpMic from '../Icon/HelpMic'
 import Mic from '../Icon/Mic'
+import AlzLogo30 from '../Icon/AlzLogo30'
 
 
 const GoHelp = () => {
@@ -34,13 +35,14 @@ const GoHelp = () => {
   )
 }
 
-const AMypage = () => {
+const AMainPage = () => {
   const [textArr, setTextArr] = useState(['오늘의 질문', '쪽지 남기기'])
   const [action, setAction] = useState('')
   const [help, setHelp] = useState(false)
   const navigate = useNavigate()
 
-  const handleClickAction = useCallback((text: string) => {
+  const handleClickAction = useCallback((text?: string) => {
+    if(!text) return
     setAction(text)
   }, [])
   const handleToggleHelp = useCallback(() => {
@@ -120,7 +122,7 @@ const AMypage = () => {
       {/* 로고 */}
       <div className="absolute left-0 right-0 top-[52px] flex flex-row items-center justify-start gap-[8px] py-[14px] px-[24px] bg-[#fff] overflow-hidden">
         <div className="flex-1 text-[18px] leading-[28px] font-['Pretendard'] font-semibold text-[#212121]">
-          로고~
+          <AlzLogo30 />
         </div>
         <MyPageLogo />
       </div>
@@ -135,4 +137,4 @@ const AMypage = () => {
     </div>
   )
 }
-export default AMypage
+export default AMainPage

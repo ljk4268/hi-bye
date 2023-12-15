@@ -1,9 +1,9 @@
-import React, { ReactNode } from 'react'
-
+import React, { ReactNode, memo } from 'react'
 interface InputFieldProps {
   type: string
   value: string
   onChange: (event: React.ChangeEvent<HTMLInputElement>) => void
+  onClick?: () => void
   placeholder: string
   errorMessage?: string
   children?: ReactNode
@@ -14,6 +14,7 @@ const InputField: React.FC<InputFieldProps> = ({
   type,
   value,
   onChange,
+  onClick,
   placeholder,
   errorMessage,
   children,
@@ -34,6 +35,7 @@ const InputField: React.FC<InputFieldProps> = ({
           type={type}
           value={value}
           onChange={onChange}
+          onClick={onClick}
           className="flex-1 text-[16px] leading-[26px] font-['Pretendard'] text-[#646464] outline-none"
           placeholder={placeholder}
         />
@@ -50,4 +52,4 @@ const InputField: React.FC<InputFieldProps> = ({
   )
 }
 
-export default InputField
+export default memo(InputField)

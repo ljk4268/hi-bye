@@ -2,8 +2,8 @@ import { memo } from 'react'
 
 interface ITitleButtonProps {
   text: string
-  onClick: (text: string) => void
-  isActive: boolean
+  onClick: (text?: string) => void
+  isActive?: boolean
 }
 
 const SelectionButton: React.FC<ITitleButtonProps> = ({

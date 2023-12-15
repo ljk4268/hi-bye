@@ -6,9 +6,12 @@ import Arrow from '../../Icon/Arrow'
 import ProgressBar from '../../ProgressBar'
 import Button from '../../Button'
 import ProOneStep from './ProOneStep'
+import ProTwoStep from './ProTwoStep'
+import ProThreeStep from './ProThreeStep'
+import ProLastStep from './ProLastStep'
 
 // type
-import { IUserInfo, IProtectorInfo } from '../../../interface/commonInterface'
+import { IProtectorInfo } from '../../../interface/commonInterface'
 
 const ProtectorJoin = () => {
   const navigate = useNavigate()
@@ -29,27 +32,26 @@ const ProtectorJoin = () => {
   const birthRef = useRef<HTMLInputElement>(null)
 
   const handleGoBack = () => {
-    console.log('구현중')
-    // if (prevPages.length > 0) {
-    //   const prevPage = prevPages.pop()
-    //   if (prevPage !== undefined) {
-    //     setCurrentPage(prevPage)
-    //     setProgressValue((prevValue) => prevValue - 25)
-    //   }
-    // } else {
-    //   navigate('/alz')
-    // }
-    // if (lastPage) {
-    //   setLastPage(false)
-    // }
+    if (prevPages.length > 0) {
+      const prevPage = prevPages.pop()
+      if (prevPage !== undefined) {
+        setCurrentPage(prevPage)
+        setProgressValue((prevValue) => prevValue - 25)
+      }
+    } else {
+      navigate('/alz')
+    }
+    if (lastPage) {
+      setLastPage(false)
+    }
   }
 
   const handleGoNext = () => {
     setPrevPages((prev) => [...prev, currentPage])
     setCurrentPage((prevPage) => prevPage + 1)
-    setProgressValue((prevValue) => prevValue + 33)
+    setProgressValue((prevValue) => prevValue + 25)
     if (lastPage) {
-      navigate('/alz/patientPage')
+      navigate('/alz/protectorPage')
     }
   }
 
@@ -63,7 +65,26 @@ const ProtectorJoin = () => {
           />
         )
       case 2:
-        return (<div>2</div>)
+        return (
+          <ProTwoStep
+            protectorData={protectorData}
+            setProtectorData={setProtectorData}
+          />
+        )
+      case 3:
+        return (
+          <ProThreeStep
+            protectorData={protectorData}
+            setProtectorData={setProtectorData}
+          />
+        )
+      case 4:
+        return (
+          <ProLastStep
+            protectorData={protectorData}
+            setProtectorData={setProtectorData}
+          />
+        )
       default:
         return null
     }
@@ -80,18 +101,17 @@ const ProtectorJoin = () => {
           )
         )
         break
-      // case 2:
-      //   setIsDone(!!(userData.title !== ''))
-      //   break
-      // case 3:
-      //   setIsDone(!!(userData.tel !== ''))
-      //   break
-      // case 4:
-      //   setIsDone(!!(userData.password !== ''))
-      //   break
-      // case 5:
-      //   setLastPage(true)
-      //   break
+      case 2:
+        setIsDone(!!(protectorData.protectorName && protectorData.relationship))
+        break
+      case 3:
+        setIsDone(
+          !!(protectorData.protectorTel && protectorData.protectorPassword)
+        )
+        break
+      case 4:
+        setLastPage(true)
+        break
       default:
         setIsDone(false)
     }

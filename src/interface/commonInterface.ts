@@ -32,6 +32,11 @@ export interface IProtectorStepProps {
   onChange?: (event: React.ChangeEvent<HTMLInputElement>) => void
   onClick?: () => void
 }
+
+export interface IRelationShipModalProps {
+  setProtectorData: React.Dispatch<React.SetStateAction<IProtectorInfo>>
+  setIsShow: React.Dispatch<React.SetStateAction<boolean>>
+}
 export interface IMessage {
   id: number
   userYn: boolean

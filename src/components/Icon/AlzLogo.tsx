@@ -1,3 +1,5 @@
+import { memo } from 'react'
+
 const AlzLogo = () => {
   return (
     <svg
@@ -30,4 +32,4 @@ const AlzLogo = () => {
     </svg>
   )
 }
-export default AlzLogo
+export default memo(AlzLogo)
