@@ -1,25 +1,25 @@
 // css
-import './ChattingWithAI.css'
+import "./ChattingWithAI.css";
 
 // components
-import Button from '../Button'
-import Arrow from '../Icon/Arrow'
-import MicRecognizing from '../MicRecognizing'
-import UserAnswer from './UserAnswer'
-import AiQuestion from './AiQuestion'
+import Button from "../Button";
+import Arrow from "../Icon/Arrow";
+import MicRecognizing from "../MicRecognizing";
+import UserAnswer from "./UserAnswer";
+import AiQuestion from "./AiQuestion";
 
 // hook
-import useFormattedDate from '../../hooks/useFormattedDate'
-import useSpeechToText from '../../hooks/useSpeechToText'
-import React, { useEffect, useRef, useState } from 'react'
-import { useNavigate } from 'react-router-dom'
+import useFormattedDate from "../../hooks/useFormattedDate";
+import useSpeechToText from "../../hooks/useSpeechToText";
+import React, { useEffect, useRef, useState } from "react";
+import { useNavigate } from "react-router-dom";
 
 //type
-import { IMessage } from '../../interface/commonInterface'
+import { IMessage } from "../../interface/commonInterface";
 interface ISmallButtonProps {
-  text?: string
-  isActive?: boolean
-  onClick?: () => void
+  text?: string;
+  isActive?: boolean;
+  onClick?: () => void;
 }
 
 const SmallButton: React.FC<ISmallButtonProps> = ({
@@ -27,8 +27,8 @@ const SmallButton: React.FC<ISmallButtonProps> = ({
   isActive,
   onClick,
 }) => {
-  const backgroundColor = isActive ? 'bg-[#841EFF]' : 'bg-[#fff]'
-  const textColor = isActive ? 'text-[#fff]' : 'text-[#631db1]'
+  const backgroundColor = isActive ? "bg-[#841EFF]" : "bg-[#fff]";
+  const textColor = isActive ? "text-[#fff]" : "text-[#631db1]";
   return (
     <div
       className={`flex-1 h-[56px] flex flex-row items-center justify-center py-[12px] px-[24px] border-[2px] border-solid border-[#841eff] rounded-[20px] hover:cursor-pointer ${backgroundColor}`}
@@ -40,27 +40,27 @@ const SmallButton: React.FC<ISmallButtonProps> = ({
         {text}
       </div>
     </div>
-  )
-}
+  );
+};
 
 const ChattingWithAI = () => {
-  const navigate = useNavigate()
-  const todayFormatted: string = useFormattedDate()
-  const { transcript, listening, toggleListening } = useSpeechToText()
+  const navigate = useNavigate();
+  const todayFormatted: string = useFormattedDate();
+  const { transcript, listening, toggleListening } = useSpeechToText();
   const [message, setMessage] = useState<IMessage[]>([
     {
       id: 0,
       userYn: false,
-      message: '오늘 어떤일이 있으셨나요?',
+      message: "오늘 어떤일이 있으셨나요?",
       created_at: Date.now(),
     },
-  ])
-  const scrollRef = useRef<HTMLDivElement>(null)
-  let currentNumber = 1
+  ]);
+  const scrollRef = useRef<HTMLDivElement>(null);
+  let currentNumber = 1;
 
   const handleGoBack = () => {
-    navigate(-1)
-  }
+    navigate(-1);
+  };
 
   const addNewMessage = () => {
     const newMessage: IMessage = {
@@ -68,26 +68,26 @@ const ChattingWithAI = () => {
       userYn: true,
       message: transcript,
       created_at: Date.now(),
-    }
-    setMessage((prev) => (prev ? [...prev, newMessage] : [newMessage]))
-  }
+    };
+    setMessage((prev) => (prev ? [...prev, newMessage] : [newMessage]));
+  };
 
   useEffect(() => {
-    if (!scrollRef.current) return
+    if (!scrollRef.current) return;
 
     const location =
-      scrollRef.current.scrollHeight - scrollRef.current.clientHeight
+      scrollRef.current.scrollHeight - scrollRef.current.clientHeight;
 
     if (listening) {
       scrollRef.current.scrollTo({
         top: location,
         left: 0,
-        behavior: 'smooth',
-      })
+        behavior: "smooth",
+      });
     } else if (transcript) {
-      addNewMessage()
+      addNewMessage();
     }
-  }, [transcript, listening, currentNumber])
+  }, [transcript, listening, currentNumber]);
 
   return (
     <div className="relative w-[360px] h-[800px] bg-[#fff] overflow-hidden">
@@ -124,12 +124,12 @@ const ChattingWithAI = () => {
       </div>
 
       <Button
-        text={listening ? '완료' : '말하기'}
+        text={listening ? "완료" : "말하기"}
         isDone={true}
         onClick={toggleListening}
       />
     </div>
-  )
-}
+  );
+};
 
-export default ChattingWithAI
+export default ChattingWithAI;

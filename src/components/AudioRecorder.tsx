@@ -49,7 +49,6 @@ const AudioRecorder: React.FC = () => {
     }
 
     const apiUrl = '/recog/v1/stt?lang=Kor'
-    console.log(apiUrl)
     const clientId = 'qp0jaf6s6y' // Replace with your actual Client ID
     const clientSecret = 'GMy0cLGKtCD4bBWMjB3tCopIOMKHQerto0EWrovh' // Replace with your actual Client Secret
     const headers = {
@@ -59,8 +58,6 @@ const AudioRecorder: React.FC = () => {
     }
     try {
       const response = await axios.post(apiUrl, audioBlob, { headers })
-      console.log('API 응답:', response.data)
-      // 응답을 필요에 따라 처리합니다.
     } catch (error) {
       console.error('파일 업로드 중 오류 발생:', error)
       // 오류를 처리합니다.

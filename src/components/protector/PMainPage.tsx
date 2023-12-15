@@ -1,22 +1,34 @@
 // components
-import MyPageLogo from '../Icon/MyPageLogo'
-import CardContent from './CardContent'
-import SelectionButton from '../SelectionButton'
-import AlzLogo30 from '../Icon/AlzLogo30'
-import BottomLogo from '../ActionLogo'
+import MyPageLogo from "../Icon/MyPageLogo";
+import CardContent from "./CardContent";
+import SelectionButton from "../SelectionButton";
+import AlzLogo30 from "../Icon/AlzLogo30";
+import BottomLogo from "../ActionLogo";
 
 // hook
-import useFormattedDate from '../../hooks/useFormattedDate'
-import { useNavigate } from 'react-router-dom'
+import useFormattedDate from "../../hooks/useFormattedDate";
+import { useNavigate } from "react-router-dom";
+
+import useStore from "../../store/store";
+import { useState, useEffect } from "react";
 
 const PMainPage = () => {
-  const navigate = useNavigate()
-  const todayFormatted: string = useFormattedDate()
-  
+  const [protectData, setProtectData] = useState({
+    name: "",
+    titleCode: "",
+    patientName: "",
+  });
+  const navigate = useNavigate();
+  const todayFormatted: string = useFormattedDate();
+
   const goPage = (page: string) => {
-    console.log('dfdf')
-    navigate(`/alz/${page}`)
-  }
+    navigate(`/alz/${page}`);
+  };
+
+  useEffect(() => {
+    const getProtectorData = useStore.getState().protectorData;
+    setProtectData((prev) => ({ ...prev, ...getProtectorData }));
+  }, []);
 
   return (
     <div className="relative w-[360px] h-[800px] bg-[#fff] overflow-hidden">
@@ -39,11 +51,11 @@ const PMainPage = () => {
           </div>
           <div className="self-stretch flex flex-row items-center justify-start gap-[8px]">
             <div className="flex-1 text-[24px] leading-[36px] font-['Pretendard'] font-bold text-[#212121]">
-              김보호 님!
+              {protectData.name} 님!
             </div>
             <div className="flex flex-col items-center justify-center py-0 px-[12px] bg-[#ff91b9] rounded-[40px]">
               <div className="text-[16px] leading-[26px] font-['Pretendard'] text-[#fff] whitespace-nowrap">
-                김알츠 할머니의 남편
+                {protectData.patientName} 님의 {protectData.titleCode}
               </div>
             </div>
           </div>
@@ -51,7 +63,7 @@ const PMainPage = () => {
         <div className="self-stretch text-[18px] leading-[28px] font-['Pretendard'] font-medium text-[#000] mt-[40px]">
           {todayFormatted}
           <br />
-          김알츠 할머니의 소식입니다.
+          {protectData.patientName} 님의 소식입니다.
         </div>
         {/* CardContent */}
         <div className="scroll w-[320px] overflow-x-scroll">
@@ -63,7 +75,7 @@ const PMainPage = () => {
           <SelectionButton
             text="환자 기록 모아보기"
             onClick={() => {
-              goPage('collection')
+              goPage("collection");
             }}
           />
         </div>
@@ -81,6 +93,6 @@ const PMainPage = () => {
       {/* 알츠로고 */}
       <BottomLogo />
     </div>
-  )
-}
-export default PMainPage
+  );
+};
+export default PMainPage;

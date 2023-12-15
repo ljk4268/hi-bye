@@ -1,32 +1,32 @@
 //components
-import InputField from '../../InputField'
+import InputField from "../../InputField";
 
 // type
 import {
   IProtectorStepProps,
   IRelationShipModalProps,
-} from '../../../interface/commonInterface'
-import { useEffect, useRef, useState, useCallback } from 'react'
+} from "../../../interface/commonInterface";
+import { useEffect, useRef, useState, useCallback } from "react";
 
 const RelationShipModal: React.FC<IRelationShipModalProps> = ({
   setProtectorData,
   setIsShow,
 }) => {
-  const relationShipTitle = ['남편', '아내', '아들', '딸', '지인', '직접 입력']
+  const relationShipTitle = ["남편", "아내", "아들", "딸", "지인", "직접 입력"];
   const handleSelectRelationShip = (relationship: string) => {
-    if (relationship === '직접 입력') {
-      relationship = ''
+    if (relationship === "직접 입력") {
+      relationship = "";
     }
-    setProtectorData((prev) => ({ ...prev, relationship: relationship }))
-    setIsShow(false)
-  }
+    setProtectorData((prev) => ({ ...prev, relationship: relationship }));
+    setIsShow(false);
+  };
   return (
     <div className="absolute left-[39px] top-[387px] w-[297px] flex flex-wrap items-start justify-start gap-[8px] py-[16px] px-[20px] bg-[#fff] border-[1px] border-solid border-[#d3d3d3] rounded-[10px]">
       {relationShipTitle.map((relationship) => (
         <div
           key={relationship}
           onClick={() => {
-            handleSelectRelationShip(relationship)
+            handleSelectRelationShip(relationship);
           }}
           className="flex flex-row items-center justify-center py-[6px] px-[14px] bg-[#e9e9e9] rounded-[10px] hover:cursor-pointer hover:bg-[#faff85] hover:border-[#ffe15f]"
         >
@@ -36,42 +36,42 @@ const RelationShipModal: React.FC<IRelationShipModalProps> = ({
         </div>
       ))}
     </div>
-  )
-}
+  );
+};
 
 const ProTwoStep: React.FC<IProtectorStepProps> = ({
   protectorData,
   setProtectorData,
 }) => {
-  const relationshipRef = useRef<HTMLInputElement>(null)
-  const [isShow, setIsShow] = useState(false)
+  const relationshipRef = useRef<HTMLInputElement>(null);
+  const [isShow, setIsShow] = useState(false);
 
   const handleNameChange = useCallback(
     (e: React.ChangeEvent<HTMLInputElement>) => {
-      setProtectorData((prev) => ({ ...prev, protectorName: e.target.value }))
+      setProtectorData((prev) => ({ ...prev, protectorName: e.target.value }));
     },
     [setProtectorData]
-  )
+  );
   const handleRelationShipChange = useCallback(
     (e: React.ChangeEvent<HTMLInputElement>) => {
-      if (e.target.value !== '') {
+      if (e.target.value !== "") {
         if (!isShow) {
-          setIsShow(false)
+          setIsShow(false);
         }
       }
-      setProtectorData((prev) => ({ ...prev, relationship: e.target.value }))
+      setProtectorData((prev) => ({ ...prev, relationship: e.target.value }));
     },
     [setProtectorData]
-  )
+  );
   const showModal = useCallback(() => {
-    setIsShow(!isShow)
-  }, [isShow])
+    setIsShow(!isShow);
+  }, [isShow]);
 
   useEffect(() => {
-    if (relationshipRef.current?.value === '') {
-      relationshipRef.current?.focus()
+    if (relationshipRef.current?.value === "") {
+      relationshipRef.current?.focus();
     }
-  }, [isShow])
+  }, [isShow]);
 
   return (
     <div className="relative w-[360px] h-[800px] bg-[#fff] overflow-hidden">
@@ -120,7 +120,7 @@ const ProTwoStep: React.FC<IProtectorStepProps> = ({
         />
       )}
     </div>
-  )
-}
+  );
+};
 
-export default ProTwoStep
+export default ProTwoStep;

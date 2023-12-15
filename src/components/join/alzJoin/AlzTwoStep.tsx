@@ -1,23 +1,26 @@
 // components
-import SelectionButton from '../../SelectionButton'
-import InputField from '../../InputField'
-import Mic from '../../Icon/Mic'
+import SelectionButton from "../../SelectionButton";
+import InputField from "../../InputField";
+import Mic from "../../Icon/Mic";
 // types
-import { IAlzStepProps } from '../../../interface/commonInterface'
-import { useEffect, useState } from 'react'
+import { IAlzStepProps } from "../../../interface/commonInterface";
+import { useEffect, useState, memo } from "react";
 
 const AlzTwoStep: React.FC<IAlzStepProps> = ({ userData, setUserData }) => {
-  const titleArr = ['님', '할머니', '기타']
-  const [userTitle, setUserTitle] = useState<string>(userData.title || '')
+  const titleArr = ["님", "할머니", "기타"];
+  const [userTitle, setUserTitle] = useState<string>(userData.title || "");
+
   const handleTitleChange = (text: string) => {
-    setUserData((prevData) => ({ ...prevData, title: text }))
-  }
+    setUserData((prevData) => ({ ...prevData, title: text }));
+  };
+
   const handleUserTitleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    setUserTitle(e.target.value)
-  }
+    setUserTitle(e.target.value);
+  };
   useEffect(() => {
-    setUserData((prevData) => ({ ...prevData, title: userTitle }))
-  }, [userTitle, setUserData])
+    setUserData((prevData) => ({ ...prevData, title: userTitle }));
+  }, [userTitle, setUserData]);
+
   return (
     <div className="absolute left-[24px] right-[24px] top-[214px] flex flex-col items-start justify-start gap-[42px]">
       <div className="self-stretch flex flex-col items-start justify-start">
@@ -33,11 +36,11 @@ const AlzTwoStep: React.FC<IAlzStepProps> = ({ userData, setUserData }) => {
               key={title}
               text={title}
               onClick={() => {
-                handleTitleChange(title)
+                handleTitleChange(title);
               }}
               isActive={userData.title === title}
             />
-          )
+          );
         })}
         {/* 직접 말씀해주실래요 */}
         <InputField
@@ -50,7 +53,7 @@ const AlzTwoStep: React.FC<IAlzStepProps> = ({ userData, setUserData }) => {
         </InputField>
       </div>
     </div>
-  )
-}
+  );
+};
 
-export default AlzTwoStep
+export default memo(AlzTwoStep);

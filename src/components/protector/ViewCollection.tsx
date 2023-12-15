@@ -1,11 +1,11 @@
 // components
-import Arrow from '../Icon/Arrow'
-import CalendarView from '../Calendar'
-import ActionLogo from '../ActionLogo'
-import { useNavigate } from 'react-router-dom'
+import Arrow from "../Icon/Arrow";
+import CalendarView from "../Calendar";
+import ActionLogo from "../ActionLogo";
+import { useNavigate } from "react-router-dom";
 
 const ViewCollection = () => {
-  const navigate = useNavigate()
+  const navigate = useNavigate();
   return (
     <div className="relative w-[360px] h-[800px] bg-[#fff] overflow-hidden">
       <div className="absolute left-0 right-0 top-[52px]">
@@ -13,7 +13,7 @@ const ViewCollection = () => {
         <div className="flex flex-row items-center justify-center gap-[8px] pt-[14px] pr-[56px] pb-[14px] pl-[24px] bg-[#fff] overflow-hidden hover:cursor-pointer">
           <div
             onClick={() => {
-              navigate(-1)
+              navigate(-1);
             }}
           >
             <Arrow />
@@ -103,6 +103,6 @@ const ViewCollection = () => {
       </div>
       <ActionLogo />
     </div>
-  )
-}
-export default ViewCollection
+  );
+};
+export default ViewCollection;

@@ -1,8 +1,8 @@
 // component
-import Complete from '../../Icon/Complete'
+import Complete from "../../Icon/Complete";
 
 //type
-import { IProtectorStepProps } from '../../../interface/commonInterface'
+import { IProtectorStepProps } from "../../../interface/commonInterface";
 
 const ProLastStep: React.FC<IProtectorStepProps> = ({ protectorData }) => {
   return (
@@ -14,7 +14,7 @@ const ProLastStep: React.FC<IProtectorStepProps> = ({ protectorData }) => {
             <br />
             {protectorData.patientName}님의 보호자
             <br />
-            <div className='font-bold'>{protectorData.protectorName} 님!</div>
+            <div className="font-bold">{protectorData.protectorName} 님!</div>
           </div>
           <div className="self-stretch text-[18px] leading-[28px] font-['Pretendard'] font-medium text-[#000]">
             매일매일 <br />
@@ -22,9 +22,11 @@ const ProLastStep: React.FC<IProtectorStepProps> = ({ protectorData }) => {
           </div>
         </div>
       </div>
-      <Complete />
+      <div className="absolute left-[146px] top-[114px] w-[68px] h-[68px] flex flex-row items-center justify-center bg-[#841eff] border-[2px] border-solid border-[#841eff] rounded-[40px]">
+        <Complete />
+      </div>
     </div>
-  )
-}
+  );
+};
 
-export default ProLastStep
+export default ProLastStep;

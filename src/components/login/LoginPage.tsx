@@ -1,13 +1,13 @@
-import { useNavigate } from 'react-router-dom'
+import { useNavigate } from "react-router-dom";
 
 // components
-import Mic from '../Icon/Mic'
+import Mic from "../Icon/Mic";
 
 const LoginPage = () => {
-  const navigate = useNavigate()
+  const navigate = useNavigate();
   const handleGoPage = (page: string) => {
-    navigate(`/alz/${page}`)
-  }
+    navigate(`/alz/${page}`);
+  };
   return (
     <div className="relative w-[360px] h-[800px] bg-[#fff] overflow-hidden">
       <div className="absolute left-[24px] right-[24px] top-[150px] flex flex-col items-start justify-start gap-[28px]">
@@ -23,7 +23,7 @@ const LoginPage = () => {
       <div
         className="absolute left-[24px] top-[350px] w-[312px] h-[56px] flex flex-row items-center justify-center py-[12px] px-[24px] border-[2px] border-solid border-[#841EFF] rounded-[20px] hover:cursor-pointer"
         onClick={() => {
-          handleGoPage('existingLogin')
+          handleGoPage("existingLogin");
         }}
       >
         <div className="text-[16px] leading-[26px] font-['Pretendard'] font-semibold text-[#841EFF] text-center whitespace-nowrap">
@@ -38,7 +38,7 @@ const LoginPage = () => {
           <div
             className="w-[148px] h-[130px] shrink-0 flex flex-row items-center justify-center py-[12px] px-[24px] border-[2px] border-solid border-[#841EFF] rounded-[20px] text-[16px] leading-[26px] font-['Pretendard'] font-semibold text-[#841EFF] text-center whitespace-nowrap hover:text-[18px] cursor-pointer hover:leading-[28px] hover:text-[#fff] hover:bg-[#841EFF]"
             onClick={() => {
-              handleGoPage('alzJoin')
+              handleGoPage("alzJoin");
             }}
           >
             알츠하이머 환자
@@ -46,7 +46,7 @@ const LoginPage = () => {
           <div
             className="w-[148px] h-[130px] shrink-0 flex flex-row items-center justify-center py-[12px] px-[24px] border-[2px] border-solid border-[#841EFF] rounded-[20px] text-[16px] leading-[26px] font-['Pretendard'] font-semibold text-[#841EFF] text-center whitespace-nowrap hover:text-[18px] cursor-pointer hover:leading-[28px] hover:text-[#fff] hover:bg-[#841EFF]"
             onClick={() => {
-              handleGoPage('proJoin')
+              handleGoPage("proJoin");
             }}
           >
             보호자
@@ -57,6 +57,6 @@ const LoginPage = () => {
         <Mic width="80" height="80" />
       </div>
     </div>
-  )
-}
-export default LoginPage
+  );
+};
+export default LoginPage;

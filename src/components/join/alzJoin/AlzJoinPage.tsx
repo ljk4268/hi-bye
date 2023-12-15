@@ -1,110 +1,140 @@
-import { useEffect, useRef, useState } from 'react'
-import { useNavigate } from 'react-router-dom'
+import { useEffect, useState } from "react";
+import { useNavigate } from "react-router-dom";
+import useStore from "../../../store/store";
 
 // components
-import Button from '../../Button'
-import ProgressBar from '../../ProgressBar'
-import Arrow from '../../Icon/Arrow'
-import AltOneStep from './AlzOneStep'
-import AltTwoStep from './AlzTwoStep'
-import AltThreeStep from './AlzThreeStep'
-import AltFourStep from './AlzFourStep'
-import AltLastStep from './AlzLastStep'
+import Button from "../../Button";
+import ProgressBar from "../../ProgressBar";
+import Arrow from "../../Icon/Arrow";
+import AltOneStep from "./AlzOneStep";
+import AltTwoStep from "./AlzTwoStep";
+import AltThreeStep from "./AlzThreeStep";
+import AltFourStep from "./AlzFourStep";
+import AltLastStep from "./AlzLastStep";
+import AlertModal from "../../modal/AlertModal";
 
 //type
-import { IUserInfo } from '../../../interface/commonInterface'
+import { IUserInfo, ISignData } from "../../../interface/commonInterface";
+
+//api
+import { signUp } from "../../../api/hialzAPI";
 
 const AlzJoinPage = () => {
-  const navigate = useNavigate()
-  const [currentPage, setCurrentPage] = useState(1)
-  const [lastPage, setLastPage] = useState(false)
-  const [prevPages, setPrevPages] = useState<number[]>([])
-  const [progressValue, setProgressValue] = useState(25)
+  const navigate = useNavigate();
+  const [currentPage, setCurrentPage] = useState(1);
+  const [lastPage, setLastPage] = useState(false);
+  const [prevPages, setPrevPages] = useState<number[]>([]);
+  const [progressValue, setProgressValue] = useState(25);
   const [userData, setUserData] = useState<IUserInfo>({
-    name: '',
-    gender: '',
-    birth: '',
-    title: '',
-    tel: '',
-    password: '',
-  })
-  const [isDone, setIsDone] = useState<boolean>(false)
-  const birthRef = useRef<HTMLInputElement>(null)
+    name: "",
+    gender: "",
+    birth: "",
+    title: "",
+    tel: "",
+    password: "",
+  });
+  const [isDone, setIsDone] = useState<boolean>(false);
+  const [isModal, setIsModal] = useState<boolean>(false);
 
   const handleGoBack = () => {
     if (prevPages.length > 0) {
-      const prevPage = prevPages.pop()
+      const prevPage = prevPages.pop();
       if (prevPage !== undefined) {
-        setCurrentPage(prevPage)
-        setProgressValue((prevValue) => prevValue - 25)
+        setCurrentPage(prevPage);
+        setProgressValue((prevValue) => prevValue - 25);
       }
     } else {
-      navigate('/alz')
+      navigate("/alz");
     }
     if (lastPage) {
-      setLastPage(false)
+      setLastPage(false);
     }
-  }
+  };
 
   const handleGoNext = () => {
-    if (userData.birth.length < 8) {
-      birthRef.current?.focus()
-    }
-    setPrevPages((prev) => [...prev, currentPage])
-    setCurrentPage((prevPage) => prevPage + 1)
-    setProgressValue((prevValue) => prevValue + 25)
-
     if (lastPage) {
-      navigate('/alz/patientPage')
+      navigate("/alz/patientPage");
+    } else if (currentPage === 4) {
+      const data: ISignData = {
+        name: userData.name,
+        phone: userData.tel,
+        password: userData.password,
+        birthDate: userData.birth,
+        titleCode: userData.title,
+        relationCode: "환자",
+      };
+      fn_signUp(data);
+    } else {
+      setPrevPages((prev) => [...prev, currentPage]);
+      setCurrentPage((prevPage) => prevPage + 1);
+      setProgressValue((prevValue) => prevValue + 25);
     }
-  }
+  };
+
+  const fn_signUp = async (data: ISignData) => {
+    try {
+      const res = await signUp(data);
+      if (res.data === "ok") {
+        useStore.getState().setUserData(data);
+        setPrevPages((prev) => [...prev, currentPage]);
+        setCurrentPage((prevPage) => prevPage + 1);
+        setProgressValue((prevValue) => prevValue + 25);
+      } else {
+        console.log("팝업띄우기");
+      }
+    } catch (error) {
+      console.log(error);
+    }
+  };
 
   const renderPage = () => {
     switch (currentPage) {
       case 1:
+        return <AltOneStep userData={userData} setUserData={setUserData} />;
+      case 2:
+        return <AltTwoStep userData={userData} setUserData={setUserData} />;
+      case 3:
+        return <AltThreeStep userData={userData} setUserData={setUserData} />;
+      case 4:
         return (
-          <AltOneStep
+          <AltFourStep
             userData={userData}
             setUserData={setUserData}
-            birthRef={birthRef}
+            onClick={() => {
+              setIsModal(!isModal);
+            }}
           />
-        )
-      case 2:
-        return <AltTwoStep userData={userData} setUserData={setUserData} />
-      case 3:
-        return <AltThreeStep userData={userData} setUserData={setUserData} />
-      case 4:
-        return <AltFourStep userData={userData} setUserData={setUserData} />
+        );
       case 5:
-        return <AltLastStep userData={userData} setUserData={setUserData} />
+        return <AltLastStep userData={userData} setUserData={setUserData} />;
       default:
-        return null
+        return null;
     }
-  }
+  };
 
   useEffect(() => {
     switch (currentPage) {
       case 1:
         setIsDone(
           !!(userData.name && userData.birth.length === 8 && userData.gender)
-        )
-        break
+        );
+        break;
       case 2:
-        setIsDone(!!(userData.title !== ''))
-        break
+        setIsDone(!!(userData.title !== ""));
+        break;
       case 3:
-        setIsDone(!!(userData.tel !== ''))
-        break
+        setIsDone(!!(userData.tel !== ""));
+        break;
       case 4:
-        setIsDone(!!(userData.password !== ''))
-        break
+        setIsDone(!!(userData.password !== ""));
+        break;
       case 5:
-        setLastPage(true)
-        break
+        setLastPage(true);
+        break;
       default:
-        setIsDone(false)
+        setIsDone(false);
     }
-  }, [userData, currentPage])
+  }, [userData, currentPage]);
 
   return (
     <div className="relative w-[360px] h-[800px] bg-[#fff] overflow-hidden">
@@ -125,10 +155,20 @@ const AlzJoinPage = () => {
       <Button
         isDone={isDone}
         onClick={handleGoNext}
-        text={lastPage ? '시작하기' : '다음'}
+        text={lastPage ? "시작하기" : "다음"}
       />
-    </div>
-  )
-}
 
-export default AlzJoinPage
+      {isModal && (
+        <AlertModal
+          text1="아직 준비중인 기능이에요!"
+          text2="빨리 만나보실 수 있게 노력할게요."
+          onClick={() => {
+            setIsModal(!isModal);
+          }}
+        />
+      )}
+    </div>
+  );
+};
+
+export default AlzJoinPage;

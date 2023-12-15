@@ -1,7 +1,7 @@
-import { useState, EventHandler, ReactNode, MouseEventHandler } from 'react'
+import { useState, EventHandler, ReactNode, MouseEventHandler } from "react";
 
 interface Props {
-  onClose?: MouseEventHandler
+  onClose?: MouseEventHandler;
 }
 
 const TelModal = ({ onClose }: Props) => {
@@ -30,7 +30,7 @@ const TelModal = ({ onClose }: Props) => {
         </div>
       </div>
     </div>
-  )
-}
+  );
+};
 
-export default TelModal
+export default TelModal;

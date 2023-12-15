@@ -1,9 +1,9 @@
 //components
-import InputField from '../../InputField'
+import InputField from "../../InputField";
 
 // type
-import { IProtectorStepProps } from '../../../interface/commonInterface'
-import { useCallback } from 'react'
+import { IProtectorStepProps } from "../../../interface/commonInterface";
+import { useCallback } from "react";
 
 const ProOneStep: React.FC<IProtectorStepProps> = ({
   protectorData,
@@ -11,25 +11,28 @@ const ProOneStep: React.FC<IProtectorStepProps> = ({
 }) => {
   const handleNameChange = useCallback(
     (e: React.ChangeEvent<HTMLInputElement>) => {
-      setProtectorData((prev) => ({ ...prev, patientName: e.target.value }))
+      setProtectorData((prev) => ({ ...prev, patientName: e.target.value }));
     },
     [setProtectorData]
-  )
+  );
   const handleTelChange = useCallback(
     (e: React.ChangeEvent<HTMLInputElement>) => {
-      const regex = /^[0-9\b -]{0,12}$/
+      const regex = /^[0-9\b -]{0,12}$/;
       if (regex.test(e.target.value)) {
-        setProtectorData((prev) => ({ ...prev, patientTel: e.target.value }))
+        setProtectorData((prev) => ({ ...prev, patientTel: e.target.value }));
       }
     },
     [setProtectorData]
-  )
+  );
   const handlePasswordChange = useCallback(
     (e: React.ChangeEvent<HTMLInputElement>) => {
-      setProtectorData((prev) => ({ ...prev, patientPassword: e.target.value }))
+      setProtectorData((prev) => ({
+        ...prev,
+        patientPassword: e.target.value,
+      }));
     },
     [setProtectorData]
-  )
+  );
   return (
     <div className="relative w-[360px] h-[800px] bg-[#fff] overflow-hidden">
       <div className="absolute left-[24px] right-[24px] top-[214px] flex flex-col items-start justify-start gap-[42px]">
@@ -77,7 +80,7 @@ const ProOneStep: React.FC<IProtectorStepProps> = ({
               비밀번호
             </div>
             <InputField
-              type="text"
+              type="password"
               value={protectorData.patientPassword}
               onChange={handlePasswordChange}
               placeholder="가입 시 등록한 환자분의 비밀번호를 입력해주세요"
@@ -86,7 +89,7 @@ const ProOneStep: React.FC<IProtectorStepProps> = ({
         </div>
       </div>
     </div>
-  )
-}
+  );
+};
 
-export default ProOneStep
+export default ProOneStep;

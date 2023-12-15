@@ -28,7 +28,7 @@ const InputField: React.FC<InputFieldProps> = ({
       <div
         className={`self-stretch h-[56px] shrink-0 flex flex-row items-center justify-center py-[12px] px-[24px] border-[1px] border-solid rounded-[10px] ${
           hasValue ? 'border-[#0A7FEB]' : fieldBorder
-        }`}
+        } ${errorMessage ? 'border-[#f53d3d]' : 'border-[#0A7FEB]'}`}
       >
         <input
           ref={inputRef}

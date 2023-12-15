@@ -1,13 +1,17 @@
 // components
-import InputField from '../../InputField'
+import InputField from "../../InputField";
 
 //type
-import { IAlzStepProps } from '../../../interface/commonInterface'
+import { IAlzStepProps } from "../../../interface/commonInterface";
 
-const AlzFourStep: React.FC<IAlzStepProps> = ({ userData, setUserData }) => {
+const AlzFourStep: React.FC<IAlzStepProps> = ({
+  userData,
+  setUserData,
+  onClick,
+}) => {
   const handlePasswordChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    setUserData((prevData) => ({ ...prevData, password: e.target.value }))
-  }
+    setUserData((prevData) => ({ ...prevData, password: e.target.value }));
+  };
 
   return (
     <div className="absolute left-[24px] right-[24px] top-[214px] flex flex-col items-start justify-start gap-[42px]">
@@ -26,12 +30,15 @@ const AlzFourStep: React.FC<IAlzStepProps> = ({ userData, setUserData }) => {
           value={userData.password}
           onChange={handlePasswordChange}
         />
-        <div className="text-[14px] leading-[20px] font-['Pretendard'] font-medium text-[#212121] text-center whitespace-nowrap hover:cursor-pointer">
+        <div
+          className="text-[14px] leading-[20px] font-['Pretendard'] font-medium text-[#212121] text-center whitespace-nowrap hover:cursor-pointer"
+          onClick={onClick}
+        >
           도움이 필요한가요?
         </div>
       </div>
     </div>
-  )
-}
+  );
+};
 
-export default AlzFourStep
+export default AlzFourStep;

@@ -1,17 +1,17 @@
-import './App.css'
-import { Routes, Route } from 'react-router-dom'
+import "./App.css";
+import { Routes, Route } from "react-router-dom";
 // login
-import LoginPage from './components/login/LoginPage'
-import ExistingLogin from './components/login/ExistingLogin'
-import AlzJoinPage from './components/join/alzJoin/AlzJoinPage'
-import ProtectorJoin from './components/join/prortectorJoin/ProtectorJoin'
+import LoginPage from "./components/login/LoginPage";
+import ExistingLogin from "./components/login/ExistingLogin";
+import AlzJoinPage from "./components/join/alzJoin/AlzJoinPage";
+import ProtectorJoin from "./components/join/prortectorJoin/ProtectorJoin";
 
 // patient
-import ChattingWithAI from './components/patient/ChattingWithAI'
-import AMainPage from './components/patient/AMainPage'
+import ChattingWithAI from "./components/patient/ChattingWithAI";
+import AMainPage from "./components/patient/AMainPage";
 // protector
-import PMainPage from './components/protector/PMainPage'
-import ViewCollection from './components/protector/ViewCollection'
+import PMainPage from "./components/protector/PMainPage";
+import ViewCollection from "./components/protector/ViewCollection";
 
 function App() {
   return (
@@ -29,7 +29,7 @@ function App() {
         </Routes>
       </div>
     </div>
-  )
+  );
 }
 
-export default App
+export default App;

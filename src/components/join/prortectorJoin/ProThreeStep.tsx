@@ -1,9 +1,9 @@
 //components
-import InputField from '../../InputField'
+import InputField from "../../InputField";
 
 // type
-import { IProtectorStepProps } from '../../../interface/commonInterface'
-import { useCallback } from 'react'
+import { IProtectorStepProps } from "../../../interface/commonInterface";
+import { useCallback } from "react";
 
 const ProThreeStep: React.FC<IProtectorStepProps> = ({
   protectorData,
@@ -14,19 +14,19 @@ const ProThreeStep: React.FC<IProtectorStepProps> = ({
       setProtectorData((prev) => ({
         ...prev,
         protectorPassword: e.target.value,
-      }))
+      }));
     },
     [setProtectorData]
-  )
+  );
   const handleProtectorTelChange = useCallback(
     (e: React.ChangeEvent<HTMLInputElement>) => {
-      const regex = /^[0-9\b -]{0,12}$/
+      const regex = /^[0-9\b -]{0,12}$/;
       if (regex.test(e.target.value)) {
-        setProtectorData((prev) => ({ ...prev, protectorTel: e.target.value }))
+        setProtectorData((prev) => ({ ...prev, protectorTel: e.target.value }));
       }
     },
     [setProtectorData]
-  )
+  );
   return (
     <div className="relative w-[360px] h-[800px] bg-[#fff] overflow-hidden">
       <div className="absolute left-[24px] right-[24px] top-[214px] flex flex-col items-start justify-start gap-[42px]">
@@ -66,7 +66,7 @@ const ProThreeStep: React.FC<IProtectorStepProps> = ({
         </div>
       </div>
     </div>
-  )
-}
+  );
+};
 
-export default ProThreeStep
+export default ProThreeStep;
