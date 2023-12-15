@@ -2,4 +2,5 @@
 module.exports = {
   content: ["./src/**/*.{js,jsx,ts,tsx}"],
   theme: {},
+  exclude: ["src/setupProxy.js"]
 };
