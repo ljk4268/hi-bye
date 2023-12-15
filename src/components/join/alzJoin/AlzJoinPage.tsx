@@ -2,9 +2,9 @@ import { useEffect, useRef, useState } from 'react'
 import { useNavigate } from 'react-router-dom'
 
 // components
-import Button from '../Button'
-import ProgressBar from '../ProgressBar'
-import Arrow from '../Icon/Arrow'
+import Button from '../../Button'
+import ProgressBar from '../../ProgressBar'
+import Arrow from '../../Icon/Arrow'
 import AltOneStep from './AlzOneStep'
 import AltTwoStep from './AlzTwoStep'
 import AltThreeStep from './AlzThreeStep'
@@ -12,7 +12,7 @@ import AltFourStep from './AlzFourStep'
 import AltLastStep from './AlzLastStep'
 
 //type
-import { IUserInfo } from '../../interface/commonInterface'
+import { IUserInfo } from '../../../interface/commonInterface'
 
 const AlzJoinPage = () => {
   const navigate = useNavigate()

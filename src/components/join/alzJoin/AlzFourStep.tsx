@@ -1,8 +1,8 @@
 // components
-import InputField from '../InputField'
+import InputField from '../../InputField'
 
 //type
-import { IAlzStepProps } from '../../interface/commonInterface'
+import { IAlzStepProps } from '../../../interface/commonInterface'
 
 const AlzFourStep: React.FC<IAlzStepProps> = ({ userData, setUserData }) => {
   const handlePasswordChange = (e: React.ChangeEvent<HTMLInputElement>) => {

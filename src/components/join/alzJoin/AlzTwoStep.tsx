@@ -1,9 +1,9 @@
 // components
-import SelectionButton from '../SelectionButton'
-import InputField from '../InputField'
-import Mic from '../Icon/Mic'
+import SelectionButton from '../../SelectionButton'
+import InputField from '../../InputField'
+import Mic from '../../Icon/Mic'
 // types
-import { IAlzStepProps } from '../../interface/commonInterface'
+import { IAlzStepProps } from '../../../interface/commonInterface'
 import { useEffect, useState } from 'react'
 
 const AlzTwoStep: React.FC<IAlzStepProps> = ({ userData, setUserData }) => {

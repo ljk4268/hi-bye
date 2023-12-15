@@ -1,3 +1,4 @@
+
 export interface IUserInfo {
   name: string
   gender: string
@@ -7,9 +8,26 @@ export interface IUserInfo {
   password: string
 }
 
+export interface IProtectorInfo {
+  protectorName: string
+  patientName: string
+  protectorTel: string
+  patientTel: string
+  protectorPassword: string
+  patientPassword: string
+  relationship: string
+}
+
 export interface IAlzStepProps {
   userData: IUserInfo
   setUserData: React.Dispatch<React.SetStateAction<IUserInfo>>
+  birthRef?: React.RefObject<HTMLInputElement>
+  onChange?: (event: React.ChangeEvent<HTMLInputElement>) => void
+  onClick?: () => void
+}
+export interface IProtectorStepProps {
+  protectorData: IProtectorInfo
+  setProtectorData: React.Dispatch<React.SetStateAction<IProtectorInfo>>
   birthRef?: React.RefObject<HTMLInputElement>
   onChange?: (event: React.ChangeEvent<HTMLInputElement>) => void
   onClick?: () => void

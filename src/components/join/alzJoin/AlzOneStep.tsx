@@ -1,9 +1,9 @@
 // components
-import InputField from '../InputField'
-import Mic from '../Icon/Mic'
+import InputField from '../../InputField'
+import Mic from '../../Icon/Mic'
 
 // type
-import { IAlzStepProps } from '../../interface/commonInterface'
+import { IAlzStepProps } from '../../../interface/commonInterface'
 
 const AlzOneStep: React.FC<IAlzStepProps> = ({
   userData,

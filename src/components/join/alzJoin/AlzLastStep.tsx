@@ -1,5 +1,5 @@
 //type
-import { IAlzStepProps } from '../../interface/commonInterface'
+import { IAlzStepProps } from '../../../interface/commonInterface'
 
 const AltzLastStep: React.FC<IAlzStepProps> = ({ userData, setUserData }) => {
   return (

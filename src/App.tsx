@@ -3,7 +3,8 @@ import { Routes, Route } from 'react-router-dom'
 // login
 import LoginPage from './components/login/LoginPage'
 import ExistingLogin from './components/login/ExistingLogin'
-import AlzJoinPage from './components/alzJoin/AlzJoinPage'
+import AlzJoinPage from './components/join/alzJoin/AlzJoinPage'
+import ProtectorJoin from './components/join/prortectorJoin/ProtectorJoin'
 // patient
 import AMypage from './components/patient/AMypage'
 import ChattingWithAI from './components/patient/ChattingWithAI'
@@ -16,6 +17,7 @@ function App() {
           <Route path="/alz" element={<LoginPage />} />
           <Route path="/alz/existingLogin" element={<ExistingLogin />} />
           <Route path="/alz/alzJoin" element={<AlzJoinPage />} />
+          <Route path="/alz/proJoin" element={<ProtectorJoin />} />
           <Route path="/alz/patientPage" element={<AMypage />} />
           <Route path="/alz/chatting" element={<ChattingWithAI />} />
         </Routes>

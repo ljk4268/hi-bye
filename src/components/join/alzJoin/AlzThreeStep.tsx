@@ -1,8 +1,8 @@
 // components
-import InputField from '../InputField'
+import InputField from '../../InputField'
 
 //type
-import { IAlzStepProps } from '../../interface/commonInterface'
+import { IAlzStepProps } from '../../../interface/commonInterface'
 
 const AlzThreeStep: React.FC<IAlzStepProps> = ({ userData, setUserData }) => {
   const handleTelChange = (e: React.ChangeEvent<HTMLInputElement>) => {
