@@ -9,12 +9,14 @@ import MyPageLogo from "../Icon/MyPageLogo";
 import HelpMic from "../Icon/HelpMic";
 import Mic from "../Icon/Mic";
 import AlzLogo30 from "../Icon/AlzLogo30";
-import axios from "axios";
+
+// hook
+import useAlertModal from "../../hooks/useAlertModal";
 
 const GoHelp = () => {
   return (
     <div className="absolute right-[76px] bottom-[58px] flex flex-row items-center justify-start">
-      <div className="flex flex-row items-center justify-center py-[10px] px-[18px] bg-[#631db1] rounded-[8px] overflow-hidden">
+      <div className="flex flex-row items-center justify-center py-[10px] px-[18px] bg-[#631db1] rounded-[8px] overflow-hidden hover:cursor-not-allowed">
         <div className="text-[14px] leading-[20px] font-['Pretendard'] font-medium text-[#faff85] text-center whitespace-nowrap">
           도움이 필요하신가요?
         </div>
@@ -43,57 +45,25 @@ const AMainPage = () => {
   });
   const [textArr, setTextArr] = useState(["오늘의 질문", "쪽지 남기기"]);
   const [action, setAction] = useState("");
+  const { showAlertModal, AlertModalComponent } = useAlertModal();
   const [help, setHelp] = useState(false);
   const navigate = useNavigate();
 
-  const handleClickAction = useCallback((text?: string) => {
-    if (!text) return;
-    setAction(text);
-  }, []);
+  const handleClickAction = useCallback(
+    (text?: string) => {
+      if (!text) return;
+      setAction(text);
+      showAlertModal();
+    },
+    [showAlertModal]
+  );
+
   const handleToggleHelp = useCallback(() => {
     setHelp((prevHelp) => !prevHelp);
   }, []);
 
   const handleGoPage = () => {
-    const apiUrl = `${process.env.REACT_APP_CLOVA}/testapp/v1/chat-completions/HCX-002`;
-    const headers = {
-      "X-NCP-CLOVASTUDIO-API-KEY":
-        "NTA0MjU2MWZlZTcxNDJiY5F6g/7fG0g7MPpK3u5Ycr59lZWYym2d+NK8pLFAyfR8rfPgSeBn/VsiU6SqLagLZousuJaY4k98E/qTZcIRMNwYHSJK7wagi9e9G/uCfLHAWv4am+PNwS7L75fE4J0lB+owXSkQDZYGO1tl1PmAt0d9PgGLDssg50EOfRPMx5PVW/AvY3RYU3jFAv7mpOP5z5kWGZKcx6seraTxMNpOEts=",
-      "X-NCP-APIGW-API-KEY": "seg2juIlIt4vaGm1YijmUbke9alfAlUKEYndVehP",
-      "X-NCP-CLOVASTUDIO-REQUEST-ID": "40d203f109fc40538b3d020570e83027",
-      "Content-Type": "application/json",
-      "origin":"http://175.45.200.71"
-    };
-    const data = {
-      messages: [
-        {
-          role: "system",
-          content:
-            "치매 환자를 대상으로 환자가 대답을 하면 이어서 추가 질문 생성. 단, 대화 중 치매에 대한 내용은 나오지 않아야 하고 추가 질문은 구체적인 대답을 요구하는 질문이어야 함.\n처음에는 어시스턴트 쪽에서 '''오늘은 어떤 일이 있었나요?''' 라고 질문\n\n\n그리고 대화를 끝내겠다고 하면 지금까지 있었던 대화에 대한 감정을 평가.\n\n\n[예시] \n대화 - \n사용자 : 오늘 가족과 함께 저녁을 먹었어.\n어시스턴트 : 좋은 시간을 보내셨네요! 어떤 음식을 드셨나요? \n사용자 : 메뉴는 불고기였어.\n아이들이 너무 이쁘더라. 다들 건강해 보여서 좋았어.\n어시스턴트 : 안심하신 것 같아서 다행이에요. 가족들 소식은 궁금하지 않으세요?\n사용자 : 대화 끝내기\n어시스턴트 : 오늘은 만족, 안심하고 계시네요. 가족들과의 저녁식사로 좋은 시간을 보내신 것 같아요.",
-        },
-        {
-          role: "user",
-          content: "대화 시작하자",
-        },
-      ],
-      topP: 0.8,
-      topK: 0,
-      maxTokens: 256,
-      temperature: 0.5,
-      repeatPenalty: 5.0,
-      stopBefore: [],
-      includeAiFilters: true,
-    };
-    axios
-      .post(apiUrl, data, { headers })
-      .then((response: any) => {
-        console.log("res:", response);
-      })
-      .catch((error: any) => {
-        console.error(error);
-      });
-
-    // navigate(`/alz/chatting`);
+    navigate(`/alz/chatting`);
   };
 
   useEffect(() => {
@@ -182,6 +152,7 @@ const AMainPage = () => {
         <HelpMic />
       </div>
       {help && <GoHelp />}
+      {AlertModalComponent}
     </div>
   );
 };

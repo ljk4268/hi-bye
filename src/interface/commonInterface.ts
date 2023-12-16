@@ -41,7 +41,6 @@ export interface IMessage {
   id: number;
   userYn: boolean;
   message: string;
-  created_at: number;
 }
 
 export interface IButtonProps {
@@ -79,8 +78,14 @@ export interface ICheckPatient {
 }
 
 export interface IAlertModalProps {
-  text1: string
+  text1?: string
   text2?: string
   buttonText?: string
   onClick: () => void
+}
+
+export interface ISmallButtonProps {
+  text?: string;
+  isActive?: boolean;
+  onClick?: () => void;
 }

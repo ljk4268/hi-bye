@@ -1,10 +1,10 @@
-const { createProxyMiddleware } = require('http-proxy-middleware');
+const { createProxyMiddleware } = require("http-proxy-middleware");
 
 module.exports = (app) => {
   app.use(
-    "/testapp",
+    "/v1",
     createProxyMiddleware({
-      target: "https://clovastudio.stream.ntruss.com",
+      target: "http://175.45.200.71",
       changeOrigin: true,
     })
   );

@@ -2,7 +2,6 @@
 import "./ChattingWithAI.css";
 
 // components
-import Button from "../Button";
 import Arrow from "../Icon/Arrow";
 import MicRecognizing from "../MicRecognizing";
 import UserAnswer from "./UserAnswer";
@@ -14,13 +13,12 @@ import useSpeechToText from "../../hooks/useSpeechToText";
 import React, { useEffect, useRef, useState } from "react";
 import { useNavigate } from "react-router-dom";
 
-//type
-import { IMessage } from "../../interface/commonInterface";
-interface ISmallButtonProps {
-  text?: string;
-  isActive?: boolean;
-  onClick?: () => void;
-}
+// type
+import { IMessage, ISmallButtonProps } from "../../interface/commonInterface";
+
+// api
+import { chatWithClova } from "../../api/hialzAPI";
+import axios from "axios";
 
 const SmallButton: React.FC<ISmallButtonProps> = ({
   text,
@@ -52,7 +50,6 @@ const ChattingWithAI = () => {
       id: 0,
       userYn: false,
       message: "오늘 어떤일이 있으셨나요?",
-      created_at: Date.now(),
     },
   ]);
   const scrollRef = useRef<HTMLDivElement>(null);
@@ -62,14 +59,27 @@ const ChattingWithAI = () => {
     navigate(-1);
   };
 
-  const addNewMessage = () => {
+  const addNewMessage = async () => {
     const newMessage: IMessage = {
       id: currentNumber++,
       userYn: true,
       message: transcript,
-      created_at: Date.now(),
     };
     setMessage((prev) => (prev ? [...prev, newMessage] : [newMessage]));
+    // axios
+    //   .post("http://175.45.200.71/v1/api/talk/clova-stuido", transcript)
+    //   .then((response) => {
+    //     console.log("응답 받음:", response.data);
+    //   })
+    //   .catch((error) => {
+    //     console.error("에러 발생:", error);
+    //   });
+    try {
+      const res = await chatWithClova(transcript)
+      console.log(res)
+    } catch(error) {
+      console.log(error)
+    }
   };
 
   useEffect(() => {
@@ -111,11 +121,11 @@ const ChattingWithAI = () => {
           </div>
 
           {/* chat */}
-          {message?.map((d) =>
+          {message?.map((d, index) =>
             d.userYn ? (
-              <UserAnswer key={d.id} text={d.message} />
+              <UserAnswer key={index} text={d.message} />
             ) : (
-              <AiQuestion key={d.id} />
+              <AiQuestion key={index} />
             )
           )}
 
@@ -123,11 +133,14 @@ const ChattingWithAI = () => {
         </div>
       </div>
 
-      <Button
-        text={listening ? "완료" : "말하기"}
-        isDone={true}
-        onClick={toggleListening}
-      />
+      <div className="absolute -translate-x-1/2 left-1/2 bottom-[72px] w-[312px] flex flex-row items-start justify-center gap-[16px]">
+        {message.length >= 2 && <SmallButton text="대화 그만하기" />}
+        <SmallButton
+          text={listening ? "완료" : "말하기"}
+          isActive={true}
+          onClick={toggleListening}
+        />
+      </div>
     </div>
   );
 };

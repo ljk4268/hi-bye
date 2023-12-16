@@ -5,4 +5,4 @@ function create(baseURL, options) {
   return instance
 }
 
-export const api = create(`${process.env.REACT_APP_SERVER}/v1/api`)
+export const api = create('http://175.45.200.71/v1/api')
