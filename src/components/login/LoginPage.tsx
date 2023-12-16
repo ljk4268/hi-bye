@@ -11,6 +11,7 @@ const LoginPage = () => {
   return (
     <div className="relative w-[360px] h-[800px] bg-[#fff] overflow-hidden">
       <div className="absolute left-[24px] right-[24px] top-[150px] flex flex-col items-start justify-start gap-[28px]">
+        {/* comment */}
         <div className="self-stretch text-[24px] leading-[36px] font-['Pretendard'] font-bold text-[#000]">
           안녕, 알츠
         </div>
@@ -20,6 +21,7 @@ const LoginPage = () => {
           당신이 누구인지 알려주세요.
         </div>
       </div>
+      {/* field */}
       <div
         className="absolute left-[24px] top-[350px] w-[312px] h-[56px] flex flex-row items-center justify-center py-[12px] px-[24px] border-[2px] border-solid border-[#841EFF] rounded-[20px] hover:cursor-pointer"
         onClick={() => {

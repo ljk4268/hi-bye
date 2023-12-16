@@ -1,4 +1,6 @@
-import SpeechRecognition, { useSpeechRecognition } from 'react-speech-recognition'
+import SpeechRecognition, {
+  useSpeechRecognition,
+} from "react-speech-recognition";
 
 const useSpeechToText = () => {
   const { transcript, listening, resetTranscript } = useSpeechRecognition();
@@ -6,14 +8,13 @@ const useSpeechToText = () => {
   const toggleListening = () => {
     if (listening) {
       SpeechRecognition.stopListening();
-      resetTranscript()
     } else {
-      SpeechRecognition.startListening({ language: 'ko-KR', continuous: true });
+      SpeechRecognition.startListening({ language: "ko-KR", continuous: true });
     }
-  }
-  
+    resetTranscript();
+  };
 
-  return { transcript, listening, toggleListening };
+  return { transcript, listening, toggleListening, resetTranscript };
 };
 
 export default useSpeechToText;

@@ -2,17 +2,20 @@
 import MyPageLogo from "../Icon/MyPageLogo";
 import CardContent from "./CardContent";
 import SelectionButton from "../SelectionButton";
-import AlzLogo30 from "../Icon/AlzLogo30";
+import AlzMainLogo from "../Icon/AlzMainLogo";
 import BottomLogo from "../ActionLogo";
 
 // hook
 import useFormattedDate from "../../hooks/useFormattedDate";
-import { useNavigate } from "react-router-dom";
+import useAlertModal from "../../hooks/useAlertModal";
 
 import useStore from "../../store/store";
-import { useState, useEffect } from "react";
+import { useNavigate } from "react-router-dom";
+import { useState, useEffect, useCallback } from "react";
 
 const PMainPage = () => {
+  const [action, setAction] = useState("");
+  const [textArr, setTextArr] = useState(["질문과 답변", "일기장"]);
   const [protectData, setProtectData] = useState({
     name: "",
     titleCode: "",
@@ -20,10 +23,20 @@ const PMainPage = () => {
   });
   const navigate = useNavigate();
   const todayFormatted: string = useFormattedDate();
+  const { showAlertModal, AlertModalComponent } = useAlertModal();
 
   const goPage = (page: string) => {
     navigate(`/alz/${page}`);
   };
+
+  const handleClickAction = useCallback(
+    (text?: string) => {
+      if (!text) return;
+      setAction(text);
+      showAlertModal();
+    },
+    [showAlertModal]
+  );
 
   useEffect(() => {
     const getProtectorData = useStore.getState().protectorData;
@@ -32,10 +45,10 @@ const PMainPage = () => {
 
   return (
     <div className="relative w-[360px] h-[800px] bg-[#fff] overflow-hidden">
-      {/* 상단로고들 */}
+      {/* header logo */}
       <div className="mt-[52px] flex flex-row items-center justify-start gap-[8px] py-[14px] px-[24px] bg-[#fff]">
         <div className="flex-1 text-[18px] leading-[28px] font-['Pretendard'] font-semibold text-[#212121]">
-          <AlzLogo30 />
+          <AlzMainLogo />
         </div>
         <div className="flex flex-row items-start justify-start">
           <MyPageLogo />
@@ -44,7 +57,7 @@ const PMainPage = () => {
 
       {/* content */}
       <div className="pl-[24px] pr-[24px] mt-[24px] flex flex-col items-start justify-start">
-        {/* 인사 */}
+        {/* comment */}
         <div className="self-stretch flex flex-col items-start justify-start gap-[8px]">
           <div className="self-stretch text-[20px] leading-[30px] font-['Pretendard'] font-bold text-[#212121]">
             안녕하세요.
@@ -69,9 +82,8 @@ const PMainPage = () => {
         <div className="scroll w-[320px] overflow-x-scroll">
           <CardContent />
         </div>
-
+        {/* 환자기록 모아보기 */}
         <div className="self-stretch flex flex-col items-start justify-start gap-[12px] hover:cursor-pointer">
-          {/* 환자기록 모아보기 */}
           <SelectionButton
             text="환자 기록 모아보기"
             onClick={() => {
@@ -84,14 +96,24 @@ const PMainPage = () => {
             우리 가족은 어떻게 지내고 있을까요?
           </div>
           <div className="self-stretch flex flex-col items-start justify-start gap-[20px]">
-            <SelectionButton text="질문과 답변" onClick={() => {}} />
-            <SelectionButton text="일기장" onClick={() => {}} />
+            {textArr.map((text) => {
+              return (
+                <SelectionButton
+                  key={text}
+                  text={text}
+                  onClick={handleClickAction}
+                  isActive={action === text}
+                />
+              );
+            })}
           </div>
         </div>
       </div>
 
       {/* 알츠로고 */}
       <BottomLogo />
+      {/* 팝업 */}
+      {AlertModalComponent}
     </div>
   );
 };

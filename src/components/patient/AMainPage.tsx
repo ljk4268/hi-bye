@@ -8,7 +8,8 @@ import SelectionButton from "../SelectionButton";
 import MyPageLogo from "../Icon/MyPageLogo";
 import HelpMic from "../Icon/HelpMic";
 import Mic from "../Icon/Mic";
-import AlzLogo30 from "../Icon/AlzLogo30";
+import AlzMainLogo from "../Icon/AlzMainLogo";
+import PlusIcon from "../Icon/PlusIcon";
 
 // hook
 import useAlertModal from "../../hooks/useAlertModal";
@@ -39,14 +40,15 @@ const GoHelp = () => {
 };
 
 const AMainPage = () => {
+  const [help, setHelp] = useState(false);
+  const [action, setAction] = useState("");
+  const [textArr, setTextArr] = useState(["오늘의 질문", "쪽지 남기기"]);
   const [userData, setUserData] = useState({
     name: "",
     titleCode: "",
   });
-  const [textArr, setTextArr] = useState(["오늘의 질문", "쪽지 남기기"]);
-  const [action, setAction] = useState("");
+
   const { showAlertModal, AlertModalComponent } = useAlertModal();
-  const [help, setHelp] = useState(false);
   const navigate = useNavigate();
 
   const handleClickAction = useCallback(
@@ -74,7 +76,7 @@ const AMainPage = () => {
   return (
     <div className="relative w-[360px] h-[800px] bg-[#fff] overflow-hidden">
       <div className="absolute left-[24px] right-[24px] top-[128px] flex flex-col items-start justify-start gap-[42px]">
-        {/* 멘트 */}
+        {/* comment */}
         <div className="self-stretch flex flex-col items-start justify-start gap-[12px]">
           <div className="self-stretch text-[20px] leading-[30px] font-['Pretendard'] font-bold text-[#212121]">
             안녕하세요.
@@ -85,7 +87,7 @@ const AMainPage = () => {
             오늘도 좋은 하루 보내세요!
           </div>
         </div>
-        {/* 알츠랑 이야기하기 */}
+        {/* talk with alz */}
         <div className="self-stretch flex flex-col items-center justify-start hover:cursor-pointer">
           <div
             className="self-stretch h-[130px] shrink-0 flex flex-col items-center justify-center gap-[10px] py-[12px] px-[24px] bg-[#841eff] rounded-[20px]"
@@ -97,7 +99,7 @@ const AMainPage = () => {
             </div>
           </div>
         </div>
-        {/* 가족들과 함꼐하기 */}
+        {/* with family */}
         <div className="self-stretch flex flex-col items-start justify-start gap-[6px]">
           <div className="self-stretch text-[16px] leading-[26px] font-['Pretendard'] font-semibold text-[#212121]">
             가족들과 함께하기
@@ -115,36 +117,25 @@ const AMainPage = () => {
             })}
           </div>
         </div>
-        {/* 오늘의 할 일 */}
+        {/* todoList */}
         <div className="self-stretch h-[282px] shrink-0 flex flex-col items-start justify-start gap-[8px]">
           <div className="self-stretch flex flex-row items-start justify-start gap-[10px]">
             <div className="flex-1 text-[16px] leading-[26px] font-['Pretendard'] font-semibold text-[#212121]">
               오늘의 할 일
             </div>
-            <svg
-              xmlns="http://www.w3.org/2000/svg"
-              width="24"
-              height="24"
-              viewBox="0 0 24 24"
-              fill="none"
-            >
-              <path
-                d="M10.7143 10.7143V3H13.2857V10.7143H21V13.2857H13.2857V21H10.7143V13.2857H3V10.7143H10.7143Z"
-                fill="#212121"
-              />
-            </svg>
+            <PlusIcon />
           </div>
           <TodoList />
         </div>
       </div>
-      {/* 로고 */}
+      {/* logo */}
       <div className="absolute left-0 right-0 top-[52px] flex flex-row items-center justify-start gap-[8px] py-[14px] px-[24px] bg-[#fff] overflow-hidden">
         <div className="flex-1 text-[18px] leading-[28px] font-['Pretendard'] font-semibold text-[#212121]">
-          <AlzLogo30 />
+          <AlzMainLogo />
         </div>
         <MyPageLogo />
       </div>
-      {/* 마이크 아이콘 */}
+      {/* mic */}
       <div
         className="absolute right-[16px] bottom-[48px] hover:cursor-pointer"
         onClick={handleToggleHelp}
@@ -152,6 +143,7 @@ const AMainPage = () => {
         <HelpMic />
       </div>
       {help && <GoHelp />}
+      {/* alertModal */}
       {AlertModalComponent}
     </div>
   );

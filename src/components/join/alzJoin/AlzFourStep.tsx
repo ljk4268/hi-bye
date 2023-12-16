@@ -16,6 +16,7 @@ const AlzFourStep: React.FC<IAlzStepProps> = ({
   return (
     <div className="absolute left-[24px] right-[24px] top-[214px] flex flex-col items-start justify-start gap-[42px]">
       <div className="self-stretch flex flex-col items-start justify-start">
+        {/* comment */}
         <div className="self-stretch text-[18px] leading-[28px] font-['Pretendard'] font-medium text-[#000]">
           마지막으로,
           <br />
@@ -23,6 +24,7 @@ const AlzFourStep: React.FC<IAlzStepProps> = ({
           비밀번호를 등록해주세요!
         </div>
       </div>
+      {/* field */}
       <div className="self-stretch flex flex-col items-center justify-start gap-[24px]">
         <InputField
           type="password"

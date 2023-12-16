@@ -1,23 +1,24 @@
 import { useEffect, useState, useCallback } from "react";
 import { useNavigate } from "react-router-dom";
 import useStore from "../../store/store";
+import useAlertModal from "../../hooks/useAlertModal";
 
 //components
 import InputField from "../InputField";
 import Button from "../Button";
 import Arrow from "../Icon/Arrow";
-import AlertModal from "../modal/AlertModal";
 
 // api
 import { signIn } from "../../api/hialzAPI";
 
 const ExistingLogin = () => {
   const [phone, setPhone] = useState<string | "">("");
-  const [password, setPassword] = useState<string | "">("");
   const [isDone, setIsDone] = useState<boolean>(false);
-  const [isModal, setIsModal] = useState<boolean>(false);
   const [errorMsg, setErrorMsg] = useState<string>("");
+  const [password, setPassword] = useState<string | "">("");
+  
   const navigate = useNavigate();
+  const { showAlertModal, AlertModalComponent } = useAlertModal();
 
   const handlePhoneChange = useCallback(
     (event: React.ChangeEvent<HTMLInputElement>) => {
@@ -36,7 +37,7 @@ const ExistingLogin = () => {
   );
 
   const resetPassword = () => {
-    setIsModal(!isModal);
+    showAlertModal()
   };
   const handleGoBack = () => {
     navigate(-1);
@@ -113,15 +114,7 @@ const ExistingLogin = () => {
       >
         <Arrow />
       </div>
-      {isModal && (
-        <AlertModal
-          text1="아직 준비중인 기능이에요!"
-          text2="빨리 만나보실 수 있게 노력할게요."
-          onClick={() => {
-            setIsModal(!isModal);
-          }}
-        />
-      )}
+      {AlertModalComponent}
     </div>
   );
 };

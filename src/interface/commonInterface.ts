@@ -89,3 +89,7 @@ export interface ISmallButtonProps {
   isActive?: boolean;
   onClick?: () => void;
 }
+
+export interface IStopChatModalProps {
+  onClick: () => void;
+}

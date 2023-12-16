@@ -8,7 +8,7 @@ import {
 } from "../../../interface/commonInterface";
 import { useEffect, useRef, useState, useCallback } from "react";
 
-const RelationShipModal: React.FC<IRelationShipModalProps> = ({
+const RelationShipSelectModal: React.FC<IRelationShipModalProps> = ({
   setProtectorData,
   setIsShow,
 }) => {
@@ -43,8 +43,8 @@ const ProTwoStep: React.FC<IProtectorStepProps> = ({
   protectorData,
   setProtectorData,
 }) => {
-  const relationshipRef = useRef<HTMLInputElement>(null);
   const [isShow, setIsShow] = useState(false);
+  const relationshipRef = useRef<HTMLInputElement>(null);
 
   const handleNameChange = useCallback(
     (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -76,7 +76,7 @@ const ProTwoStep: React.FC<IProtectorStepProps> = ({
   return (
     <div className="relative w-[360px] h-[800px] bg-[#fff] overflow-hidden">
       <div className="absolute left-[24px] right-[24px] top-[214px] flex flex-col items-start justify-start gap-[42px]">
-        {/* content */}
+        {/* comment */}
         <div className="self-stretch flex flex-col items-start justify-end">
           <div className="self-stretch text-[18px] leading-[28px] text-[#000]">
             <span className="font-['Pretendard'] font-medium">
@@ -85,7 +85,7 @@ const ProTwoStep: React.FC<IProtectorStepProps> = ({
             </span>
           </div>
         </div>
-        {/* inputField */}
+        {/* field */}
         <div className="self-stretch flex flex-col items-center justify-start gap-[24px]">
           <div className="self-stretch flex flex-col items-start justify-start gap-[6px]">
             <div className="w-[312px] text-[16px] leading-[26px] font-['Pretendard'] font-semibold text-[#212121]">
@@ -113,8 +113,9 @@ const ProTwoStep: React.FC<IProtectorStepProps> = ({
           </div>
         </div>
       </div>
+      {/* 관계 설정 모달창 */}
       {isShow && (
-        <RelationShipModal
+        <RelationShipSelectModal
           setProtectorData={setProtectorData}
           setIsShow={setIsShow}
         />

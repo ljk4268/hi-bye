@@ -9,7 +9,7 @@ const ViewCollection = () => {
   return (
     <div className="relative w-[360px] h-[800px] bg-[#fff] overflow-hidden">
       <div className="absolute left-0 right-0 top-[52px]">
-        {/* 기록모아보기 */}
+        {/* viewCollected */}
         <div className="flex flex-row items-center justify-center gap-[8px] pt-[14px] pr-[56px] pb-[14px] pl-[24px] bg-[#fff] overflow-hidden hover:cursor-pointer">
           <div
             onClick={() => {

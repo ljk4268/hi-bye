@@ -14,6 +14,7 @@ const AlzThreeStep: React.FC<IAlzStepProps> = ({ userData, setUserData }) => {
   return (
     <div className="absolute left-[24px] right-[24px] top-[214px] flex flex-col items-start justify-start gap-[42px]">
       <div className="self-stretch flex flex-col items-start justify-start">
+        {/* comment */}
         <div className="self-stretch text-[18px] leading-[28px] font-['Pretendard'] font-medium text-[#000]">
           본인 인증을 위해
           <br />
@@ -21,6 +22,7 @@ const AlzThreeStep: React.FC<IAlzStepProps> = ({ userData, setUserData }) => {
           등록해주세요!
         </div>
       </div>
+      {/* field */}
       <div className="self-stretch flex flex-col items-center justify-start">
         <InputField
           type="text"

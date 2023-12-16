@@ -45,8 +45,10 @@ const AlzOneStep: React.FC<IAlzStepProps> = ({
           정확한 정보를 제공해드리기 위해 개인정보를 받고있어요.
         </div>
       </div>
+
+      {/* field */}
       <div className="self-stretch flex flex-col items-center justify-start gap-[24px]">
-        {/* 성함 */}
+        {/* name */}
         <div className="self-stretch flex flex-col items-start justify-start gap-[6px]">
           <div className="w-[312px] text-[16px] leading-[26px] font-['Pretendard'] font-semibold text-[#212121]">
             성함이 어떻게 되세요?
@@ -62,7 +64,7 @@ const AlzOneStep: React.FC<IAlzStepProps> = ({
             </div>
           </InputField>
         </div>
-        {/* 성별 */}
+        {/* gender */}
         <div className="self-stretch flex flex-col items-start justify-start gap-[6px]">
           <div className="w-[312px] text-[16px] leading-[26px] font-['Pretendard'] font-semibold text-[#212121]">
             성별을 알려주세요!
@@ -98,7 +100,7 @@ const AlzOneStep: React.FC<IAlzStepProps> = ({
             </div>
           </div>
         </div>
-        {/* 생년월일 */}
+        {/* birth */}
         <div className="self-stretch flex flex-col items-start justify-start gap-[6px]">
           <div className="w-[312px] text-[16px] leading-[26px] font-['Pretendard'] font-semibold text-[#212121]">
             생년월일을 알려주세요!

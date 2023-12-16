@@ -4,7 +4,7 @@ module.exports = (app) => {
   app.use(
     "/v1",
     createProxyMiddleware({
-      target: "http://175.45.200.71",
+      target: `${process.env.REACT_APP_SERVER}`,
       changeOrigin: true,
     })
   );

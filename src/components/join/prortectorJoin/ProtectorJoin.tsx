@@ -1,4 +1,4 @@
-import { useEffect, useRef, useState } from "react";
+import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 
 // component
@@ -20,13 +20,14 @@ import {
 
 //api
 import { checkIsPatient, signUp } from "../../../api/hialzAPI";
-import useStore from "../../../store/store";
 
 const ProtectorJoin = () => {
-  const navigate = useNavigate();
-  const [currentPage, setCurrentPage] = useState(1);
+  const [isDone, setIsDone] = useState<boolean>(false);
+  const [isModal, setIsModal] = useState<boolean>(false);
   const [lastPage, setLastPage] = useState(false);
   const [prevPages, setPrevPages] = useState<number[]>([]);
+  const [isRegister, setIsRegister] = useState<boolean>(false);
+  const [currentPage, setCurrentPage] = useState(1);
   const [progressValue, setProgressValue] = useState(25);
   const [protectorData, setProtectorData] = useState<IProtectorInfo>({
     protectorName: "",
@@ -38,10 +39,8 @@ const ProtectorJoin = () => {
     relationship: "",
     patientId: 0,
   });
-  const [isDone, setIsDone] = useState<boolean>(false);
-  const [isModal, setIsModal] = useState<boolean>(false);
-  const [isRegister, setIsRegister] = useState<boolean>(false);
 
+  const navigate = useNavigate();
   const handleGoBack = () => {
     if (prevPages.length > 0) {
       const prevPage = prevPages.pop();
@@ -56,7 +55,6 @@ const ProtectorJoin = () => {
       setLastPage(false);
     }
   };
-
   const handleGoNext = async () => {
     if (lastPage) {
       navigate("/alz/protectorPage");
@@ -66,7 +64,7 @@ const ProtectorJoin = () => {
         password: protectorData.patientPassword,
       };
       const res = await checkPatient(params);
-      if(res === 'fail') return
+      if (res === "fail") return;
     } else if (currentPage === 3) {
       const params: ISignData = {
         name: protectorData.protectorName,
@@ -78,7 +76,7 @@ const ProtectorJoin = () => {
         patientId: protectorData.patientId,
       };
       const res = await fn_signUp(params);
-      if(res === 'fail') return
+      if (res === "fail") return;
     }
     setPrevPages((prev) => [...prev, currentPage]);
     setCurrentPage((prevPage) => prevPage + 1);
@@ -93,7 +91,7 @@ const ProtectorJoin = () => {
       } else {
         setIsRegister(true);
         setIsModal(!isModal);
-        return "fail"
+        return "fail";
       }
     } catch (error) {
       console.log(error);
@@ -105,7 +103,7 @@ const ProtectorJoin = () => {
       const res = await checkIsPatient(params);
       if (res.data === "fail") {
         setIsModal(!isModal);
-        return "fail"
+        return "fail";
       } else {
         setProtectorData((prev) => ({ ...prev, patientId: res.data }));
       }
@@ -186,7 +184,8 @@ const ProtectorJoin = () => {
   return (
     <div className="relative w-[360px] h-[800px] bg-[#fff] overflow-hidden">
       {renderPage()}
-      {/* 버튼 및 프로그래스바 */}
+
+      {/* header - arrow & progressBar */}
       <div
         className="absolute left-0 right-0 top-[52px] h-[56px] flex flex-row items-center justify-start py-[14px] px-[24px] bg-[#fff] overflow-hidden hover:cursor-pointer"
         onClick={handleGoBack}
@@ -199,11 +198,14 @@ const ProtectorJoin = () => {
         </div>
       )}
 
+      {/* button */}
       <Button
         isDone={isDone}
         onClick={handleGoNext}
         text={lastPage ? "시작하기" : "다음"}
       />
+
+      {/* alertModal */}
       {isModal && (
         <AlertModal
           text1={

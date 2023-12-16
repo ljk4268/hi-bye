@@ -1,7 +1,7 @@
 import { useRef, useState } from 'react'
 import axios from 'axios'
 
-const AudioRecorder: React.FC = () => {
+const useAudioRecorder: React.FC = () => {
   const [isRecording, setIsRecording] = useState(false)
   const [audioBlob, setAudioBlob] = useState<Blob | null>(null)
 
@@ -84,4 +84,4 @@ const AudioRecorder: React.FC = () => {
   )
 }
 
-export default AudioRecorder
+export default useAudioRecorder
