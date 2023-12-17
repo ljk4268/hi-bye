@@ -57,7 +57,7 @@ const ProtectorJoin = () => {
   };
   const handleGoNext = async () => {
     if (lastPage) {
-      navigate("/alz/protectorPage");
+      navigate("/alz/existingLogin");
     } else if (currentPage === 1) {
       const params: ICheckPatient = {
         phone: protectorData.patientTel,
@@ -86,9 +86,7 @@ const ProtectorJoin = () => {
   const fn_signUp = async (params: ISignData) => {
     try {
       const res = await signUp(params);
-      if (res.data === "ok") {
-        navigate("/alz/existingLogin");
-      } else {
+      if (res.data !== "ok") {
         setIsRegister(true);
         setIsModal(!isModal);
         return "fail";
@@ -114,7 +112,7 @@ const ProtectorJoin = () => {
 
   const goPatientJoinPage = (page: string) => {
     setIsModal(!isModal);
-    navigate(`/alz/${page}`);
+    navigate(`/alz/${page}`, { replace: true });
   };
 
   const renderPage = () => {
