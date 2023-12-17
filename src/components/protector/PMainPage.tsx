@@ -118,13 +118,8 @@ const PMainPage = () => {
             <br />
             질문을 만들어 보세요!
           </div>
-          <div className="self-stretch h-[56px] shrink-0 flex flex-row items-center justify-center py-[12px] px-[24px] border-[1px] border-solid border-[#841eff] rounded-[10px]">
-            <div className="text-[16px] leading-[26px] font-['Pretendard'] font-semibold text-[#631db1] text-center whitespace-nowrap">
-              질문 추천받기
-            </div>
-          </div>
+          <SelectionButton text="질문 추천받기" onClick={handleClickAction} />
         </div>
-        
       </div>
       {/* 알츠로고 */}
       <BottomLogo />

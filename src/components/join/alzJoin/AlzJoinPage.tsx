@@ -12,6 +12,7 @@ import AltTwoStep from "./AlzTwoStep";
 import AltThreeStep from "./AlzThreeStep";
 import AltFourStep from "./AlzFourStep";
 import AltLastStep from "./AlzLastStep";
+import AlertModal from "../../modal/AlertModal";
 
 //type
 import { IUserInfo, ISignData } from "../../../interface/commonInterface";
@@ -21,6 +22,7 @@ import { signUp } from "../../../api/hialzAPI";
 
 const AlzJoinPage = () => {
   const [isDone, setIsDone] = useState<boolean>(false);
+  const [isModal, setIsModal] = useState<boolean>(false);
   const [lastPage, setLastPage] = useState(false);
   const [userData, setUserData] = useState<IUserInfo>({
     name: "",
@@ -35,7 +37,6 @@ const AlzJoinPage = () => {
   const [progressValue, setProgressValue] = useState(25);
 
   const navigate = useNavigate();
-  const { showAlertModal, AlertModalComponent } = useAlertModal();
 
   const handleGoBack = () => {
     if (prevPages.length > 0) {
@@ -72,6 +73,10 @@ const AlzJoinPage = () => {
     }
   };
 
+  const handleGoPage = () => {
+    navigate("/alz/existingLogin")
+  }
+
   const fn_signUp = async (data: ISignData) => {
     try {
       const res = await signUp(data);
@@ -81,7 +86,7 @@ const AlzJoinPage = () => {
         setCurrentPage((prevPage) => prevPage + 1);
         setProgressValue((prevValue) => prevValue + 25);
       } else {
-        console.log("팝업띄우기");
+        setIsModal(!isModal)
       }
     } catch (error) {
       console.log(error);
@@ -101,7 +106,6 @@ const AlzJoinPage = () => {
           <AltFourStep
             userData={userData}
             setUserData={setUserData}
-            onClick={showAlertModal}
           />
         );
       case 5:
@@ -137,9 +141,8 @@ const AlzJoinPage = () => {
 
   return (
     <div className="relative w-[360px] h-[800px] bg-[#fff] overflow-hidden">
-      
       {renderPage()}
-      
+
       {/* header - arrow & progressBar */}
       <div
         className="absolute left-0 right-0 top-[52px] h-[56px] flex flex-row items-center justify-start py-[14px] px-[24px] bg-[#fff] overflow-hidden hover:cursor-pointer"
@@ -147,7 +150,7 @@ const AlzJoinPage = () => {
       >
         <Arrow />
       </div>
-      
+
       {!lastPage && (
         <div className="absolute -translate-x-1/2 left-1/2 top-[114px] w-[216px] h-[24px]">
           <ProgressBar value={progressValue} />
@@ -161,7 +164,14 @@ const AlzJoinPage = () => {
         text={lastPage ? "시작하기" : "다음"}
       />
       {/* alertModal */}
-      {AlertModalComponent}
+      {isModal && (
+        <AlertModal
+          text1="이미 등록된 계정입니다."
+          text2="로그인하러 가시겠어요?"
+          buttonText="로그인하러 가기"
+          onClick={handleGoPage}
+        />
+      )}
     </div>
   );
 };

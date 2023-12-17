@@ -7,7 +7,6 @@ import { IAlzStepProps } from "../../../interface/commonInterface";
 const AlzFourStep: React.FC<IAlzStepProps> = ({
   userData,
   setUserData,
-  onClick,
 }) => {
   const handlePasswordChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     setUserData((prevData) => ({ ...prevData, password: e.target.value }));
@@ -32,12 +31,6 @@ const AlzFourStep: React.FC<IAlzStepProps> = ({
           value={userData.password}
           onChange={handlePasswordChange}
         />
-        <div
-          className="text-[14px] leading-[20px] font-['Pretendard'] font-medium text-[#212121] text-center whitespace-nowrap hover:cursor-pointer"
-          onClick={onClick}
-        >
-          도움이 필요한가요?
-        </div>
       </div>
     </div>
   );

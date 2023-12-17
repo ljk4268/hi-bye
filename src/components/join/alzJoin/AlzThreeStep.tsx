@@ -18,7 +18,7 @@ const AlzThreeStep: React.FC<IAlzStepProps> = ({ userData, setUserData }) => {
         <div className="self-stretch text-[18px] leading-[28px] font-['Pretendard'] font-medium text-[#000]">
           본인 인증을 위해
           <br />
-          김알츠 할머니의 휴대폰 번호를 <br />
+          {userData.name} {userData.title}의 휴대폰 번호를 <br />
           등록해주세요!
         </div>
       </div>
