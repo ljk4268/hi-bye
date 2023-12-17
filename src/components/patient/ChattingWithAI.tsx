@@ -78,7 +78,6 @@ const StopChatModal: React.FC<IStopChatModalProps> = ({ onClick }) => {
 };
 
 const ChattingWithAI = () => {
-  const scrollRef = useRef<HTMLDivElement>(null);
   const [message, setMessage] = useState<IMessage[]>([
     {
       id: 0,
@@ -90,6 +89,7 @@ const ChattingWithAI = () => {
   const [currentNumber, setCurrentNumber] = useState(1);
 
   const navigate = useNavigate();
+  const scrollRef = useRef<HTMLDivElement>(null);
   const todayFormatted: string = useFormattedDate();
   const { transcript, listening, toggleListening } = useSpeechToText();
 
@@ -123,7 +123,7 @@ const ChattingWithAI = () => {
 
         const clovaResponse =
           response.data.replace("응답 받음: ", "") ||
-          response.data.replace("알츠: ", "");
+          response.data.replace("알츠 : ", "");
         const aiMessage = {
           id: currentNumber,
           userYn: false,
@@ -160,22 +160,30 @@ const ChattingWithAI = () => {
     [transcript, chatWithClova]
   );
 
-  useEffect(() => {
+  const scrollToBottom = () => {
     if (!scrollRef.current) return;
 
-    // const location =
-    //   scrollRef.current.scrollHeight - scrollRef.current.clientHeight;
+    const location =
+      scrollRef.current.scrollHeight - scrollRef.current.clientHeight;
 
+    scrollRef.current.scrollTo({
+      top: location,
+      left: 0,
+      behavior: "smooth",
+    });
+  };
+
+  useEffect(() => {
     if (listening) {
-      scrollRef.current.scrollTo({
-        top: scrollRef.current.scrollHeight,
-        left: 0,
-        behavior: "smooth",
-      });
+      scrollToBottom();
     } else if (transcript) {
       addNewMessage();
     }
   }, [transcript, listening, addNewMessage]);
+
+  useEffect(() => {
+    scrollToBottom();
+  }, [message, stopChat]);
 
   return (
     <div className="relative w-[360px] h-[800px] bg-[#fff] overflow-hidden">
