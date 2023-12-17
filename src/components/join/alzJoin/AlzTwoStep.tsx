@@ -49,9 +49,11 @@ const AlzTwoStep: React.FC<IAlzStepProps> = ({ userData, setUserData }) => {
           type="text"
           value={userTitle}
           onChange={handleUserTitleChange}
-          placeholder="직접 말씀해주실래요?"
+          placeholder="직접 입력해주세요"
         >
-          <Mic />
+          <div className="hover: cursor-not-allowed">
+            <Mic />
+          </div>
         </InputField>
       </div>
     </div>

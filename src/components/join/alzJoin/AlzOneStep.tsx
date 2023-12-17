@@ -59,7 +59,7 @@ const AlzOneStep: React.FC<IAlzStepProps> = ({
             onChange={handleNameChange}
             placeholder="성함을 입력해주세요"
           >
-            <div className="hover:cursor-pointer">
+            <div className="hover:cursor-not-allowed">
               <Mic />
             </div>
           </InputField>
