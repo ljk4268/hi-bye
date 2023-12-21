@@ -1,47 +1,47 @@
 // components
-import MyPageLogo from "../Icon/MyPageLogo";
-import CardContent from "./CardContent";
-import SelectionButton from "../SelectionButton";
-import AlzMainLogo from "../Icon/AlzMainLogo";
-import BottomLogo from "../ActionLogo";
+import MyPageLogo from '../Icon/MyPageLogo'
+import CardContent from './CardContent'
+import SelectionButton from '../SelectionButton'
+import AlzMainLogo from '../Icon/AlzMainLogo'
+import BottomLogo from '../ActionLogo'
 
 // hook
-import useFormattedDate from "../../hooks/useFormattedDate";
-import useAlertModal from "../../hooks/useAlertModal";
+import useFormattedDate from '../../hooks/useFormattedDate'
+import useAlertModal from '../../hooks/useAlertModal'
 
-import useStore from "../../store/store";
-import { useNavigate } from "react-router-dom";
-import { useState, useEffect, useCallback } from "react";
+import useStore from '../../store/store'
+import { useNavigate } from 'react-router-dom'
+import { useState, useEffect, useCallback } from 'react'
 
 const PMainPage = () => {
-  const [action, setAction] = useState("");
-  const [textArr, setTextArr] = useState(["질문과 답변", "일기장"]);
+  const [action, setAction] = useState('')
+  const [textArr, setTextArr] = useState(['질문과 답변', '일기장'])
   const [protectData, setProtectData] = useState({
-    name: "",
-    titleCode: "",
-    patientName: "",
-  });
-  const navigate = useNavigate();
-  const todayFormatted: string = useFormattedDate();
-  const { showAlertModal, AlertModalComponent } = useAlertModal();
+    name: '',
+    titleCode: '',
+    patientName: '',
+  })
+  const navigate = useNavigate()
+  const todayFormatted: string = useFormattedDate()
+  const { openAlertModal, AlertModalComponent } = useAlertModal()
 
   const goPage = (page: string) => {
-    navigate(`/alz/${page}`);
-  };
+    navigate(`/alz/${page}`)
+  }
 
   const handleClickAction = useCallback(
     (text?: string) => {
-      if (!text) return;
-      setAction(text);
-      showAlertModal();
+      if (!text) return
+      setAction(text)
+      openAlertModal()
     },
-    [showAlertModal]
-  );
+    [openAlertModal]
+  )
 
   useEffect(() => {
-    const getProtectorData = useStore.getState().protectorData;
-    setProtectData((prev) => ({ ...prev, ...getProtectorData }));
-  }, []);
+    const getProtectorData = useStore.getState().protectorData
+    setProtectData((prev) => ({ ...prev, ...getProtectorData }))
+  }, [])
 
   return (
     <div className="relative w-[360px] h-screen flex justify-center items-center bg-white">
@@ -88,7 +88,7 @@ const PMainPage = () => {
             <SelectionButton
               text="환자 기록 모아보기"
               onClick={() => {
-                goPage("collection");
+                goPage('collection')
               }}
             />
           </div>
@@ -105,7 +105,7 @@ const PMainPage = () => {
                     onClick={handleClickAction}
                     isActive={action === text}
                   />
-                );
+                )
               })}
             </div>
           </div>
@@ -126,6 +126,6 @@ const PMainPage = () => {
       {/* 팝업 */}
       {AlertModalComponent}
     </div>
-  );
-};
-export default PMainPage;
+  )
+}
+export default PMainPage

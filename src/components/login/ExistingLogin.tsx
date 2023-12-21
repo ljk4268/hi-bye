@@ -1,79 +1,79 @@
-import { useEffect, useState, useCallback } from "react";
-import { useNavigate } from "react-router-dom";
-import useStore from "../../store/store";
-import useAlertModal from "../../hooks/useAlertModal";
+import { useEffect, useState, useCallback } from 'react'
+import { useNavigate } from 'react-router-dom'
+import useStore from '../../store/store'
+import useAlertModal from '../../hooks/useAlertModal'
 
 //components
-import InputField from "../InputField";
-import Button from "../Button";
-import Arrow from "../Icon/Arrow";
+import InputField from '../InputField'
+import Button from '../Button'
+import Arrow from '../Icon/Arrow'
 
 // api
-import { signIn } from "../../api/hialzAPI";
+import { signIn } from '../../api/hialzAPI'
 
 const ExistingLogin = () => {
-  const [phone, setPhone] = useState<string | "">("");
-  const [isDone, setIsDone] = useState<boolean>(false);
-  const [errorMsg, setErrorMsg] = useState<string>("");
-  const [password, setPassword] = useState<string | "">("");
-  
-  const navigate = useNavigate();
-  const { showAlertModal, AlertModalComponent } = useAlertModal();
+  const [phone, setPhone] = useState<string | ''>('')
+  const [isDone, setIsDone] = useState<boolean>(false)
+  const [errorMsg, setErrorMsg] = useState<string>('')
+  const [password, setPassword] = useState<string | ''>('')
+
+  const navigate = useNavigate()
+  const { openAlertModal, AlertModalComponent } = useAlertModal()
 
   const handlePhoneChange = useCallback(
     (event: React.ChangeEvent<HTMLInputElement>) => {
-      const regex = /^[0-9\b -]{0,12}$/;
+      const regex = /^[0-9\b -]{0,12}$/
       if (regex.test(event.target.value)) {
-        setPhone(event.target.value);
+        setPhone(event.target.value)
       }
     },
     []
-  );
+  )
   const handlePasswordChange = useCallback(
     (event: React.ChangeEvent<HTMLInputElement>) => {
-      setPassword(event.target.value);
+      setPassword(event.target.value)
     },
     []
-  );
+  )
 
   const resetPassword = () => {
-    showAlertModal()
-  };
+    openAlertModal()
+  }
   const handleGoBack = () => {
-    navigate(-1);
-  };
+    navigate(-1)
+  }
 
   const handleButtonClick = async () => {
     const params = {
       phone,
       password,
-    };
+    }
     try {
-      const res = await signIn(params);
-      const user = res.data;
+      const res = await signIn(params)
+      const user = res.data
       if (user.name) {
-        if (res.data.relationCode === "환자") {
-          useStore.getState().setUserData(user);
-          navigate("/alz/patientPage");
+        if (res.data.relationCode === '환자') {
+          useStore.getState().setUserData(user)
+          navigate('/alz/patientPage')
         } else {
-          useStore.getState().setProtectorData(user);
-          navigate("/alz/protectorPage");
+          useStore.getState().setProtectorData(user)
+          navigate('/alz/protectorPage')
         }
       } else {
-        setErrorMsg("회원가입 혹은 계정을 확인해주세요");
+        setErrorMsg('회원가입 혹은 계정을 확인해주세요')
       }
     } catch (error) {
-      console.log(error);
+      console.log(error)
     }
-  };
+  }
 
   useEffect(() => {
     if (phone && password) {
-      setIsDone(true);
+      setIsDone(true)
     } else {
-      setIsDone(false);
+      setIsDone(false)
     }
-  }, [phone, password]);
+  }, [phone, password])
   return (
     <div className="relative w-[360px] h-[800px] bg-[#fff] overflow-hidden">
       <div className="absolute left-[24px] right-[24px] top-[150px] flex flex-col items-start justify-start gap-[42px]">
@@ -116,7 +116,7 @@ const ExistingLogin = () => {
       </div>
       {AlertModalComponent}
     </div>
-  );
-};
+  )
+}
 
-export default ExistingLogin;
+export default ExistingLogin

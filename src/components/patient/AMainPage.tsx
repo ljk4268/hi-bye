@@ -1,18 +1,18 @@
-import { useCallback, useEffect, useState } from "react";
-import { useNavigate } from "react-router-dom";
-import useStore from "../../store/store";
+import { useCallback, useEffect, useState } from 'react'
+import { useNavigate } from 'react-router-dom'
+import useStore from '../../store/store'
 
 // components
-import TodoList from "../todo/TodoList";
-import SelectionButton from "../SelectionButton";
-import MyPageLogo from "../Icon/MyPageLogo";
-import HelpMic from "../Icon/HelpMic";
-import Mic from "../Icon/Mic";
-import AlzMainLogo from "../Icon/AlzMainLogo";
-import PlusIcon from "../Icon/PlusIcon";
+import TodoList from '../todo/TodoList'
+import SelectionButton from '../SelectionButton'
+import MyPageLogo from '../Icon/MyPageLogo'
+import HelpMic from '../Icon/HelpMic'
+import Mic from '../Icon/Mic'
+import AlzMainLogo from '../Icon/AlzMainLogo'
+import PlusIcon from '../Icon/PlusIcon'
 
 // hook
-import useAlertModal from "../../hooks/useAlertModal";
+import useAlertModal from '../../hooks/useAlertModal'
 
 const GoHelp = () => {
   return (
@@ -36,42 +36,42 @@ const GoHelp = () => {
         />
       </svg>
     </div>
-  );
-};
+  )
+}
 
 const AMainPage = () => {
-  const [help, setHelp] = useState(false);
-  const [action, setAction] = useState("");
-  const [textArr, setTextArr] = useState(["오늘의 질문", "쪽지 남기기"]);
+  const [help, setHelp] = useState(false)
+  const [action, setAction] = useState('')
+  const [textArr, setTextArr] = useState(['오늘의 질문', '쪽지 남기기'])
   const [userData, setUserData] = useState({
-    name: "",
-    titleCode: "",
-  });
+    name: '',
+    titleCode: '',
+  })
 
-  const { showAlertModal, AlertModalComponent } = useAlertModal();
-  const navigate = useNavigate();
+  const { openAlertModal, AlertModalComponent } = useAlertModal()
+  const navigate = useNavigate()
 
   const handleClickAction = useCallback(
     (text?: string) => {
-      if (!text) return;
-      setAction(text);
-      showAlertModal();
+      if (!text) return
+      setAction(text)
+      openAlertModal()
     },
-    [showAlertModal]
-  );
+    [openAlertModal]
+  )
 
   const handleToggleHelp = useCallback(() => {
-    setHelp((prevHelp) => !prevHelp);
-  }, []);
+    setHelp((prevHelp) => !prevHelp)
+  }, [])
 
   const handleGoPage = () => {
-    navigate(`/alz/chatting`);
-  };
+    navigate(`/alz/chatting`)
+  }
 
   useEffect(() => {
-    const getUserData = useStore.getState().userData;
-    setUserData((prev) => ({ ...prev, ...getUserData }));
-  }, []);
+    const getUserData = useStore.getState().userData
+    setUserData((prev) => ({ ...prev, ...getUserData }))
+  }, [])
 
   return (
     <div className="relative w-[360px] h-[800px] bg-[#fff] overflow-hidden">
@@ -113,7 +113,7 @@ const AMainPage = () => {
                   onClick={handleClickAction}
                   isActive={action === text}
                 />
-              );
+              )
             })}
           </div>
         </div>
@@ -146,6 +146,6 @@ const AMainPage = () => {
       {/* alertModal */}
       {AlertModalComponent}
     </div>
-  );
-};
-export default AMainPage;
+  )
+}
+export default AMainPage
